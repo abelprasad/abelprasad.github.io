@@ -123,6 +123,7 @@ const AIAssistant = () => {
 
       setMessages(prev => [...prev, { role: 'assistant', text: response.text || "I'm sorry, I couldn't process that request." }]);
     } catch (error) {
+      console.error('AI Error:', error);
       setMessages(prev => [...prev, { role: 'assistant', text: "Connection error. Please try again later." }]);
     } finally {
       setIsLoading(false);
