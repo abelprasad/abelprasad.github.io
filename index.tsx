@@ -120,6 +120,81 @@ const ProjectCard = ({ project }: { project: Project }) => (
   </div>
 );
 
+const MiniAbel = () => {
+  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [frame, setFrame] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const targetRef = useRef({ x: 100, y: 100 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const newX = e.clientX - 25;
+      const newY = e.clientY - 50;
+
+      // Determine direction
+      if (newX < position.x) {
+        setIsFlipped(true);
+      } else if (newX > position.x) {
+        setIsFlipped(false);
+      }
+
+      targetRef.current = { x: newX, y: newY };
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [position.x]);
+
+  useEffect(() => {
+    const animate = () => {
+      setPosition(prev => {
+        const dx = targetRef.current.x - prev.x;
+        const dy = targetRef.current.y - prev.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 1) return prev;
+
+        const speed = 0.05;
+        return {
+          x: prev.x + dx * speed,
+          y: prev.y + dy * speed
+        };
+      });
+
+      // Animate sprite frames
+      setFrame(prev => (prev + 1) % 5);
+    };
+
+    const interval = setInterval(animate, 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      className="fixed pointer-events-none z-[999]"
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        width: '50px',
+        height: '100px',
+        transform: isFlipped ? 'scaleX(-1)' : 'scaleX(1)',
+        transition: 'transform 0.2s'
+      }}
+    >
+      <div
+        style={{
+          width: '250px',
+          height: '100px',
+          backgroundImage: 'url(/abel-sprite.png)',
+          backgroundSize: '250px 100px',
+          backgroundPosition: `${-frame * 50}px 0`,
+          imageRendering: 'pixelated'
+        }}
+      />
+    </div>
+  );
+};
+
 const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -442,6 +517,7 @@ const HomePage = () => {
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
       <AIAssistant />
+      <MiniAbel />
     </main>
   );
 };
