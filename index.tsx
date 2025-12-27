@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { GoogleGenAI } from "@google/genai";
 
 // --- Types ---
@@ -19,9 +20,9 @@ interface Message {
 
 const Navbar = () => (
   <nav className="fixed top-0 w-full z-50 px-6 py-8 flex justify-between items-center backdrop-blur-md bg-brand-black/50 border-b border-white/5">
-    <div className="text-xl font-extrabold tracking-tighter">
-      PORT<span className="text-brand-purple">FOLIO</span>
-    </div>
+    <Link to="/" className="text-xl font-extrabold tracking-tighter hover:text-brand-purple transition-colors">
+      ABEL<span className="text-brand-purple">PRASAD</span>
+    </Link>
     <div className="space-x-8 text-sm font-medium uppercase tracking-widest text-gray-400 hidden md:flex">
       <a href="#projects" className="hover:text-brand-purple transition-colors">Projects</a>
       <a href="#about" className="hover:text-brand-purple transition-colors">About</a>
@@ -37,12 +38,12 @@ const Hero = () => (
     <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-darkPurple/10 rounded-full blur-[120px] animate-pulse-slow delay-700"></div>
 
     <div className="relative z-10 text-center max-w-4xl">
-      <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Frontend Engineer & UI Designer</p>
+      <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Full-Stack Developer & AI Enthusiast</p>
       <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-tight">
-        Building <span className="text-gradient">digital experiences</span> that matter.
+        Building <span className="text-gradient">intelligent solutions</span> that matter.
       </h1>
       <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-        Focusing on minimalist design and performant code. Specialized in React, TypeScript, and the Gemini ecosystem.
+        Computer Science student passionate about full-stack development and AI/ML. Experienced in React, Node.js, Python, and cloud technologies.
       </p>
       <div className="flex gap-4 justify-center">
         <a href="#projects" className="px-8 py-4 bg-brand-purple hover:bg-brand-darkPurple text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-purple/20">
@@ -87,7 +88,7 @@ const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', text: "Hi! I'm the AI version of the developer. Ask me about their stack, experience, or approach to design!" }
+    { role: 'assistant', text: "Hi! I'm Abel's AI assistant. Ask me about his projects, tech stack, or experience!" }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -107,12 +108,12 @@ const AIAssistant = () => {
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
       const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-1.5-flash',
         contents: userMessage,
         config: {
-          systemInstruction: "You are the AI Digital Twin for a world-class Senior Frontend Engineer. You are helpful, professional, and minimalist in your responses. You specialize in React, Tailwind, and high-end UI design. Keep your answers concise and elegant. If someone asks for contact info, direct them to the contact section or say they can reach out via LinkedIn.",
+          systemInstruction: "You are Abel Prasad's AI assistant. Abel is a Computer Science student at Penn State University (graduating May 2026) and a full-stack developer passionate about AI/ML. His skills include: Frontend (React, Next.js, TypeScript, Tailwind), Backend (Node.js, Express, FastAPI, Python, MongoDB, PostgreSQL), and AI/ML (TensorFlow, NLP, Transformers, RAG). His key projects: FanTravels (full-stack app with FastAPI/Next.js/PostgreSQL), Sathika Boutique (e-commerce with Stripe), and ClipCheck (ML misinformation detection). He's open to internships and freelance work. Keep responses concise and professional. For contact, direct to abelprasad4@gmail.com or LinkedIn.",
         }
       });
 
@@ -184,33 +185,36 @@ const AIAssistant = () => {
   );
 };
 
+// Shared project data
+const allProjects: Project[] = [
+  {
+    title: "FanTravels",
+    description: "Full-stack web app connecting pop-culture fandom with UNESCO World Heritage Sites. Features user check-ins, posts, badges, and geolocation mapping with PostGIS.",
+    tags: ["FastAPI", "Next.js", "PostgreSQL", "PostGIS", "Tailwind"],
+    link: "https://github.com/abelprasad/Fan-Travels"
+  },
+  {
+    title: "Sathika Boutique",
+    description: "Full-stack e-commerce platform with product catalog, shopping cart, checkout flow, and Stripe payment integration. Includes admin dashboard for inventory management.",
+    tags: ["Next.js", "MongoDB", "Express.js", "Stripe", "TypeScript"],
+    link: "https://github.com/abelprasad/SathikaBoutique"
+  },
+  {
+    title: "ClipCheck",
+    description: "ML-based misinformation detection system for Reddit using NLP and sentiment analysis. Achieves 85%+ accuracy with supervised learning algorithms.",
+    tags: ["Python", "Flask", "NLP", "TensorFlow", "Scikit-learn"],
+    link: "https://github.com/abelprasad/Clip-Check"
+  },
+  {
+    title: "CryptoBear",
+    description: "Automated grid-trading bot for cryptocurrency markets. Executes systematic trading strategies on BTC/USD through Alpaca with real-time Telegram notifications and cloud deployment.",
+    tags: ["Python", "CCXT", "Alpaca API", "Docker", "GCP"],
+    link: "https://github.com/abelprasad/CryptoBear"
+  }
+];
+
 const Projects = () => {
-  const data: Project[] = [
-    {
-      title: "Nebula Dashboard",
-      description: "A data visualization platform for high-performance computing environments using D3.js and React.",
-      tags: ["React", "D3.js", "Tailwind", "Firebase"],
-      link: "#"
-    },
-    {
-      title: "Etherum Wallet SDK",
-      description: "Developer tools for seamless web3 integration in modern browser applications with a focus on UX.",
-      tags: ["TypeScript", "Ethers.js", "Next.js"],
-      link: "#"
-    },
-    {
-      title: "Zenith OS",
-      description: "A browser-based operating system mockup built to explore the limits of web technologies and performance.",
-      tags: ["WebAssembly", "Rust", "React"],
-      link: "#"
-    },
-    {
-      title: "Synthetix Design System",
-      description: "A comprehensive, accessible design library for enterprise-scale UI development.",
-      tags: ["Storybook", "Framer Motion", "SCSS"],
-      link: "#"
-    }
-  ];
+  const data = allProjects.slice(0, 3);
 
   return (
     <section id="projects" className="py-32 px-6">
@@ -221,13 +225,51 @@ const Projects = () => {
             <p className="text-gray-400">Selected works that showcase technical expertise and design sensibility.</p>
           </div>
           <div className="h-px bg-white/10 flex-1 mx-8 hidden md:block mb-6"></div>
-          <div className="text-brand-purple font-mono text-sm mb-6">VIEW ALL / 24</div>
+          <Link to="/projects" className="text-brand-purple font-mono text-sm mb-6 hover:text-white transition-colors flex items-center gap-2">
+            VIEW ALL / {allProjects.length}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+          </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {data.map(p => <ProjectCard key={p.title} project={p} />)}
         </div>
       </div>
     </section>
+  );
+};
+
+const AllProjectsPage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <main className="antialiased min-h-screen">
+      <Navbar />
+      <section className="pt-32 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-12"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+            Back to Home
+          </button>
+
+          <div className="mb-16">
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-6">All Projects</h1>
+            <p className="text-gray-400 text-lg">A comprehensive collection of my work in full-stack development and AI/ML.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allProjects.map(p => <ProjectCard key={p.title} project={p} />)}
+          </div>
+        </div>
+      </section>
+      <Contact />
+      <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
+        © {new Date().getFullYear()} Designed & Coded with Passion
+      </footer>
+      <AIAssistant />
+    </main>
   );
 };
 
@@ -236,23 +278,22 @@ const Contact = () => (
     <div className="max-w-4xl mx-auto text-center">
       <h2 className="text-5xl font-extrabold mb-8">Let's build something <span className="text-brand-purple">extraordinary.</span></h2>
       <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
-        Currently available for selected freelance work and collaboration.
+        Open to internships, freelance projects, and collaboration opportunities.
       </p>
       <div className="flex flex-col md:flex-row justify-center gap-6">
-        <a href="mailto:hello@example.com" className="bg-white text-brand-black px-10 py-4 rounded-full font-bold hover:bg-brand-purple hover:text-white transition-all">
+        <a href="mailto:abelprasad4@gmail.com" className="bg-white text-brand-black px-10 py-4 rounded-full font-bold hover:bg-brand-purple hover:text-white transition-all">
           Email Me
         </a>
         <div className="flex items-center justify-center gap-6">
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
+          <a href="https://github.com/abelprasad" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/abel-prasad/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
         </div>
       </div>
     </div>
   </section>
 );
 
-const App = () => {
+const HomePage = () => {
   return (
     <main className="antialiased">
       <Navbar />
@@ -265,9 +306,9 @@ const App = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
             
             {/* The Headshot Image */}
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" 
-              alt="Developer Headshot"
+            <img
+              src="/headshot.jpg"
+              alt="Abel Prasad Headshot"
               className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
             />
 
@@ -282,27 +323,45 @@ const App = () => {
           </div>
         </div>
         <div className="space-y-8">
-          <h2 className="text-4xl font-extrabold">Engineering intuitive interfaces since 2018.</h2>
+          <h2 className="text-4xl font-extrabold">Computer Science student at Penn State University.</h2>
           <p className="text-gray-400 leading-relaxed text-lg">
-            I'm a designer-engineer hybrid focused on building products that look as good as they function. My work sits at the intersection of aesthetic minimalism and high-performance engineering.
+            Full-stack developer passionate about building intelligent web applications. Experienced in modern web technologies and AI/ML, with a focus on creating scalable solutions. Graduating May 2026.
           </p>
           <div className="grid grid-cols-2 gap-8 pt-8">
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">FRONTEND</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
                 <li>React / Next.js</li>
-                <li>TypeScript</li>
+                <li>TypeScript / JavaScript</li>
                 <li>Tailwind CSS</li>
-                <li>Three.js / Canvas</li>
+                <li>HTML / CSS</li>
               </ul>
             </div>
             <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">ECOSYSTEM</h5>
+              <h5 className="text-brand-purple font-mono text-sm mb-4">BACKEND</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>Gemini API</li>
-                <li>Node.js / Go</li>
-                <li>PostgreSQL</li>
-                <li>Vercel / AWS</li>
+                <li>Node.js / Express.js</li>
+                <li>FastAPI / Python</li>
+                <li>MongoDB / PostgreSQL</li>
+                <li>REST APIs</li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="text-brand-purple font-mono text-sm mb-4">AI/ML</h5>
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>TensorFlow / Pandas</li>
+                <li>NLP / Transformers</li>
+                <li>RAG / Agentic AI</li>
+                <li>NumPy / Scikit-learn</li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="text-brand-purple font-mono text-sm mb-4">CLOUD & TOOLS</h5>
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>AWS / Azure / GCP</li>
+                <li>Docker / GitHub</li>
+                <li>Linux / SQL</li>
+                <li>Vercel / Render</li>
               </ul>
             </div>
           </div>
@@ -314,6 +373,17 @@ const App = () => {
       </footer>
       <AIAssistant />
     </main>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<AllProjectsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
