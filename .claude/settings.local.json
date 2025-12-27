@@ -4,7 +4,12 @@
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
       "WebFetch(domain:github.com)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "Bash(gh run list:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
