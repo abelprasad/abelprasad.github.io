@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { GoogleGenAI } from "@google/genai";
 
 // --- Types ---
 interface Project {
@@ -112,16 +111,33 @@ const AIAssistant = () => {
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
-      const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
-        contents: userMessage,
-        config: {
-          systemInstruction: "You are Abel Prasad's AI assistant. Abel is a Computer Science student at Penn State University (graduating May 2026) and a full-stack developer passionate about AI/ML. His skills include: Frontend (React, Next.js, TypeScript, Tailwind), Backend (Node.js, Express, FastAPI, Python, MongoDB, PostgreSQL), and AI/ML (TensorFlow, NLP, Transformers, RAG). His key projects: FanTravels (full-stack app with FastAPI/Next.js/PostgreSQL), Sathika Boutique (e-commerce with Stripe), and ClipCheck (ML misinformation detection). He's open to internships and freelance work. Keep responses concise and professional. For contact, direct to abelprasad4@gmail.com or LinkedIn.",
-        }
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-70b-versatile',
+          messages: [
+            {
+              role: 'system',
+              content: "You are Abel Prasad's AI assistant. Abel is a Computer Science student at Penn State University (graduating May 2026) and a full-stack developer passionate about AI/ML. His skills include: Frontend (React, Next.js, TypeScript, Tailwind), Backend (Node.js, Express, FastAPI, Python, MongoDB, PostgreSQL), and AI/ML (TensorFlow, NLP, Transformers, RAG). His key projects: FanTravels (full-stack app with FastAPI/Next.js/PostgreSQL), Sathika Boutique (e-commerce with Stripe), and ClipCheck (ML misinformation detection). He's open to internships and freelance work. Keep responses concise and professional. For contact, direct to abelprasad4@gmail.com or LinkedIn."
+            },
+            {
+              role: 'user',
+              content: userMessage
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 500
+        })
       });
 
-      setMessages(prev => [...prev, { role: 'assistant', text: response.text || "I'm sorry, I couldn't process that request." }]);
+      const data = await response.json();
+      const aiResponse = data.choices?.[0]?.message?.content || "I'm sorry, I couldn't process that request.";
+
+      setMessages(prev => [...prev, { role: 'assistant', text: aiResponse }]);
     } catch (error) {
       console.error('AI Error:', error);
       setMessages(prev => [...prev, { role: 'assistant', text: "Connection error. Please try again later." }]);
