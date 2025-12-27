@@ -145,16 +145,26 @@ const AIAssistant = () => {
           </div>
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={i} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                {m.role === 'assistant' && (
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-purple to-brand-darkPurple flex items-center justify-center animate-pulse-slow">
+                    <div className="w-6 h-6 rounded-full border-2 border-white/30 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                    </div>
+                  </div>
+                )}
                 <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${m.role === 'user' ? 'bg-brand-purple text-white rounded-br-none' : 'bg-white/5 text-gray-300 rounded-bl-none border border-white/5'}`}>
                   {m.text}
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-white/5 text-gray-500 px-4 py-3 rounded-2xl rounded-bl-none border border-white/5 text-xs animate-pulse">
-                  AI is thinking...
+              <div className="flex gap-3 justify-start">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-purple to-brand-darkPurple flex items-center justify-center animate-spin-slow">
+                  <div className="w-6 h-6 rounded-full border-2 border-white/30 border-t-white"></div>
+                </div>
+                <div className="bg-white/5 text-gray-500 px-4 py-3 rounded-2xl rounded-bl-none border border-white/5 text-xs">
+                  <span className="animate-pulse">AI is thinking...</span>
                 </div>
               </div>
             )}
