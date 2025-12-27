@@ -90,7 +90,8 @@ const Hero = () => {
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const ProjectCard = ({ project }: { project: Project }) => (
   <div className="group relative bg-[#111] border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500 overflow-hidden">
