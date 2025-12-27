@@ -32,17 +32,17 @@ const Navbar = () => (
 
 const Hero = () => {
   // Generate random stars
-  const stars = Array.from({ length: 50 }, (_, i) => ({
+  const stars = Array.from({ length: 150 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     delay: `${Math.random() * 3}s`,
     duration: `${2 + Math.random() * 3}s`,
-    size: Math.random() > 0.5 ? 2 : 1
+    size: Math.random() > 0.7 ? 2 : Math.random() > 0.4 ? 1.5 : 1
   }));
 
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+    <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden bg-black">
       {/* Animated Stars */}
       {stars.map(star => (
         <div
