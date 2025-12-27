@@ -124,7 +124,7 @@ const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', text: "Hi! I'm Abel's AI assistant. Ask me about his projects, tech stack, or experience!" }
+    { role: 'assistant', text: "Hi! I'm Abel's AI assistant. Ask me anything about his projects, skills, or experience!" }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
