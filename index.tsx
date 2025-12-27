@@ -135,6 +135,12 @@ const AIAssistant = () => {
       });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        console.error('Groq API Error:', data);
+        throw new Error(data.error?.message || 'API request failed');
+      }
+
       const aiResponse = data.choices?.[0]?.message?.content || "I'm sorry, I couldn't process that request.";
 
       setMessages(prev => [...prev, { role: 'assistant', text: aiResponse }]);
