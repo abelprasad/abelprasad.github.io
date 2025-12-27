@@ -93,45 +93,6 @@ const Hero = () => {
   );
 };
 
-const SkillBar = ({ skill, level }: { skill: string; level: number }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const barRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (barRef.current) {
-      observer.observe(barRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={barRef} className="mb-4">
-      <div className="flex justify-between mb-2">
-        <span className="text-gray-300 text-sm">{skill}</span>
-        <span className="text-brand-purple text-sm font-mono">{level}%</span>
-      </div>
-      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-brand-purple to-brand-darkPurple rounded-full transition-all duration-1000 ease-out"
-          style={{
-            width: isVisible ? `${level}%` : '0%'
-          }}
-        />
-      </div>
-    </div>
-  );
-};
-
 const ProjectCard = ({ project }: { project: Project }) => (
   <div className="group relative bg-[#111] border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500 overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -436,31 +397,42 @@ const HomePage = () => {
           <p className="text-gray-400 leading-relaxed text-lg">
             Full-stack developer passionate about building intelligent web applications. Experienced in modern web technologies and AI/ML, with a focus on creating scalable solutions. Graduating May 2026.
           </p>
-
-          <div className="pt-8 space-y-6">
+          <div className="grid grid-cols-2 gap-8 pt-8">
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">FRONTEND</h5>
-              <SkillBar skill="React / Next.js" level={90} />
-              <SkillBar skill="TypeScript / JavaScript" level={85} />
-              <SkillBar skill="Tailwind CSS" level={80} />
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>React / Next.js</li>
+                <li>TypeScript / JavaScript</li>
+                <li>Tailwind CSS</li>
+                <li>HTML / CSS</li>
+              </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">BACKEND</h5>
-              <SkillBar skill="Node.js / Express.js" level={85} />
-              <SkillBar skill="Python / FastAPI" level={80} />
-              <SkillBar skill="MongoDB / PostgreSQL" level={75} />
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>Node.js / Express.js</li>
+                <li>FastAPI / Python</li>
+                <li>MongoDB / PostgreSQL</li>
+                <li>REST APIs</li>
+              </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">AI/ML</h5>
-              <SkillBar skill="TensorFlow / Pandas" level={75} />
-              <SkillBar skill="NLP / Transformers" level={70} />
-              <SkillBar skill="RAG / Agentic AI" level={65} />
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>TensorFlow / Pandas</li>
+                <li>NLP / Transformers</li>
+                <li>RAG / Agentic AI</li>
+                <li>NumPy / Scikit-learn</li>
+              </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">CLOUD & TOOLS</h5>
-              <SkillBar skill="AWS / Azure / GCP" level={70} />
-              <SkillBar skill="Docker / GitHub" level={80} />
-              <SkillBar skill="Linux / SQL" level={75} />
+              <ul className="text-gray-400 space-y-2 text-sm">
+                <li>AWS / Azure / GCP</li>
+                <li>Docker / GitHub</li>
+                <li>Linux / SQL</li>
+                <li>Vercel / Render</li>
+              </ul>
             </div>
           </div>
         </div>
