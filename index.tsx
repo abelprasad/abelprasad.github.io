@@ -30,11 +30,43 @@ const Navbar = () => (
   </nav>
 );
 
-const Hero = () => (
-  <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
-    {/* Background Glows */}
-    <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] animate-pulse-slow"></div>
-    <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-darkPurple/10 rounded-full blur-[120px] animate-pulse-slow delay-700"></div>
+const Hero = () => {
+  // Generate random stars
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 3}s`,
+    duration: `${2 + Math.random() * 3}s`,
+    size: Math.random() > 0.5 ? 2 : 1
+  }));
+
+  return (
+    <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+      {/* Animated Stars */}
+      {stars.map(star => (
+        <div
+          key={star.id}
+          className="absolute rounded-full bg-white animate-twinkle"
+          style={{
+            left: star.left,
+            top: star.top,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animationDelay: star.delay,
+            animationDuration: star.duration
+          }}
+        />
+      ))}
+
+      {/* Shooting Stars */}
+      <div className="absolute top-20 right-20 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '0s' }}></div>
+      <div className="absolute top-40 right-60 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '4s' }}></div>
+      <div className="absolute top-60 left-40 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '8s' }}></div>
+
+      {/* Background Glows */}
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-darkPurple/10 rounded-full blur-[120px] animate-pulse-slow delay-700"></div>
 
     <div className="relative z-10 text-center max-w-4xl">
       <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Full-Stack Developer & AI Enthusiast</p>
