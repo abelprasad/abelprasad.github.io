@@ -180,7 +180,7 @@ THE PROJECTS (his digital children):
 
 🎯 FocusGuard: An AI-powered desktop app that uses computer vision to monitor focus and productivity. Built with Electron, React, and MediaPipe for real-time face detection at 30 FPS. Features session management with Pomodoro timers, smart notifications for extended absence, and live focus metrics. Everything runs locally - no data leaves your computer. Privacy-first productivity tracking!
 
-📝 Fillr: A Chrome extension that automates job application form completion with one click. Smart field detection works across major ATS platforms (Workday, Greenhouse, Lever, Taleo). Built with vanilla JavaScript and Manifest V3, featuring local-only storage for privacy, automatic application tracking, and CSV export for your job search records. Turns hours of repetitive form-filling into seconds!
+📝 Fillr: AI-powered Chrome extension (v1.4.0) that automates job applications with one-click autofill across 40+ field types. Features AI-generated cover letters and custom question answers powered by Groq/Llama 3.3 70B model. Supports major ATS platforms (Workday, Greenhouse, Lever, Taleo, LinkedIn, Indeed) with intelligent field detection, keyboard shortcuts (Alt+F fill, Alt+P preview), application tracking dashboard, and CSV export. Built with vanilla JavaScript and Manifest V3 with privacy-first local storage. Transforms tedious form-filling into seconds!
 
 🔍 ClipCheck: An ML-powered misinformation detector for Reddit that analyzes video clips with 85%+ accuracy. Used Python, Flask, NLP, and sentiment analysis to fight fake news one post at a time. Built the entire text classification pipeline with TensorFlow and scikit-learn. Basically, a BS detector with a technical degree.
 
@@ -325,8 +325,8 @@ const allProjects: Project[] = [
   },
   {
     title: "Fillr",
-    description: "Privacy-first Chrome extension that automates job application form completion. Smart field detection with local-only storage, supporting major ATS platforms and featuring application tracking with CSV export.",
-    tags: ["Chrome Extension", "JavaScript", "Manifest V3"],
+    description: "AI-powered Chrome extension that automates job applications with one-click autofill. Features intelligent field detection across 40+ types, AI-generated cover letters and custom answers using Groq/Llama, application tracking, and privacy-first local storage.",
+    tags: ["Chrome Extension", "JavaScript", "Groq AI", "Manifest V3"],
     link: "https://github.com/abelprasad/fillr"
   },
   {
