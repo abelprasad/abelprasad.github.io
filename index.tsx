@@ -178,6 +178,10 @@ THE PROJECTS (his digital children):
 
 👗 Sathika Boutique: Created a complete e-commerce platform with product catalog, shopping cart, Stripe payment integration (making it rain responsibly), and an admin dashboard. Built the entire REST API with Express.js, designed MongoDB schemas, and made it all look pretty with Tailwind CSS. Because fashion meets function!
 
+🎯 FocusGuard: An AI-powered desktop app that uses computer vision to monitor focus and productivity. Built with Electron, React, and MediaPipe for real-time face detection at 30 FPS. Features session management with Pomodoro timers, smart notifications for extended absence, and live focus metrics. Everything runs locally - no data leaves your computer. Privacy-first productivity tracking!
+
+📝 Fillr: A Chrome extension that automates job application form completion with one click. Smart field detection works across major ATS platforms (Workday, Greenhouse, Lever, Taleo). Built with vanilla JavaScript and Manifest V3, featuring local-only storage for privacy, automatic application tracking, and CSV export for your job search records. Turns hours of repetitive form-filling into seconds!
+
 🔍 ClipCheck: An ML-powered misinformation detector for Reddit that analyzes video clips with 85%+ accuracy. Used Python, Flask, NLP, and sentiment analysis to fight fake news one post at a time. Built the entire text classification pipeline with TensorFlow and scikit-learn. Basically, a BS detector with a technical degree.
 
 🐻 CryptoBear: An automated crypto trading bot using grid strategies on BTC/USD through Alpaca. Features real-time Telegram notifications, 24/7 cloud deployment on GCP, and Docker containerization. It trades while Abel sleeps - the ultimate passive income dream!
@@ -312,6 +316,18 @@ const allProjects: Project[] = [
     description: "Full-stack e-commerce platform with product catalog, shopping cart, checkout flow, and Stripe payment integration. Includes admin dashboard for inventory management.",
     tags: ["Next.js", "MongoDB", "Express.js", "Stripe", "TypeScript"],
     link: "https://github.com/abelprasad/SathikaBoutique"
+  },
+  {
+    title: "FocusGuard",
+    description: "AI-powered desktop application that monitors focus and productivity using computer vision. Real-time face detection with session management and smart notifications, all processing locally for privacy.",
+    tags: ["Electron", "React", "MediaPipe", "TypeScript", "Vite"],
+    link: "https://github.com/abelprasad/FocusGuard"
+  },
+  {
+    title: "Fillr",
+    description: "Privacy-first Chrome extension that automates job application form completion. Smart field detection with local-only storage, supporting major ATS platforms and featuring application tracking with CSV export.",
+    tags: ["Chrome Extension", "JavaScript", "Manifest V3"],
+    link: "https://github.com/abelprasad/fillr"
   },
   {
     title: "ClipCheck",
