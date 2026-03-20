@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
 
 // --- Types ---
 interface Project {
@@ -15,6 +15,16 @@ interface Message {
   text: string;
 }
 
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  content: string[];
+}
+
 // --- Components ---
 
 const Navbar = () => (
@@ -25,6 +35,7 @@ const Navbar = () => (
     <div className="space-x-8 text-sm font-medium uppercase tracking-widest text-gray-400 hidden md:flex">
       <a href="#projects" className="hover:text-brand-purple transition-colors">Projects</a>
       <a href="#about" className="hover:text-brand-purple transition-colors">About</a>
+      <Link to="/blog" className="hover:text-brand-purple transition-colors">Blog</Link>
       <a href="#contact" className="hover:text-brand-purple transition-colors">Contact</a>
     </div>
   </nav>
@@ -343,6 +354,57 @@ const allProjects: Project[] = [
   }
 ];
 
+const allPosts: BlogPost[] = [
+  {
+    slug: "building-fillr-ai-job-applications",
+    title: "Building Fillr: Automating Job Applications with AI",
+    excerpt: "How I built a Chrome extension that uses Groq's Llama model to autofill job applications, generate cover letters, and track submissions — all in one click.",
+    date: "March 15, 2026",
+    readTime: "6 min read",
+    tags: ["AI", "Chrome Extension", "JavaScript"],
+    content: [
+      "Job hunting as a senior CS student is a full-time job in itself. Between classes, projects, and networking events, I found myself spending hours every week copying and pasting the same information into application after application. Name, email, work experience, skills — the same fields, over and over, across Workday, Greenhouse, Lever, and a dozen other platforms.",
+      "That frustration is what sparked Fillr. I wanted a tool that could learn my information once and then fill any form intelligently — not just a simple autofill, but something that could handle the weird, context-dependent fields like 'Why do you want to work here?' or 'Describe a challenge you've overcome.'",
+      "The architecture was simpler than I expected. Fillr is a Manifest V3 Chrome extension built with vanilla JavaScript. When activated with Alt+F, it scans the DOM for input fields and classifies them by type — name, email, phone, education, work history, and so on. I ended up supporting 40+ field types to handle the quirks of each ATS platform.",
+      "The AI piece was the fun part. I integrated Groq's API with the Llama 3.3 70B model to handle open-ended questions. When Fillr encounters a field it can't fill from static data, it sends the field label to Groq along with a system prompt containing my background, and the model generates a relevant, personalized answer on the fly. Cover letters are handled the same way — Fillr reads the job title and company from the page, then generates a tailored letter in seconds.",
+      "Privacy was a core constraint. Everything — my profile data, application history, generated answers — lives in chrome.storage.local. No external database, no accounts, no syncing. The only outbound calls are to Groq's API when AI generation is needed.",
+      "The result? What used to take 20 minutes per application now takes under a minute. I've tracked over 80 applications through Fillr's built-in dashboard. Building tools that solve your own problems is genuinely one of the best ways to learn — you care about the outcome, so you push through the hard parts."
+    ]
+  },
+  {
+    slug: "focusguard-computer-vision-productivity",
+    title: "Computer Vision for Productivity: The FocusGuard Story",
+    excerpt: "How I used MediaPipe and Electron to build a privacy-first desktop app that monitors focus using real-time face detection — no data ever leaves your machine.",
+    date: "February 20, 2026",
+    readTime: "5 min read",
+    tags: ["Electron", "React", "MediaPipe", "Computer Vision"],
+    content: [
+      "I have a bad habit of zoning out when I'm supposed to be studying. I'll sit at my desk, notebook open, and suddenly realize 20 minutes have passed and I've been staring at nothing. I wanted a solution that could catch me drifting — something that runs on my laptop without sending video to the cloud.",
+      "FocusGuard was born from that frustration. The core idea is simple: use the laptop camera to detect when a face is present and alert the user after extended absences. But building it cleanly took a lot more thought than I expected.",
+      "I chose Electron because I wanted a native desktop feel with the productivity of React for the UI. Electron gives you access to system APIs and the camera, while React handles the dashboard — session timers, focus scores, historical charts.",
+      "For face detection, I integrated Google's MediaPipe Face Landmarker. It runs entirely in-process at 30 FPS using WebAssembly, which means zero network requests and zero latency from round-trips. The model is loaded once at startup and runs on a worker thread so it doesn't block the main UI.",
+      "The UX decisions were the trickiest part. Too many notifications and the app becomes annoying; too few and it's useless. I landed on a tiered alert system: a gentle nudge at 3 minutes of absence, a louder notification at 5 minutes, and an automatic Pomodoro break suggestion at 10 minutes. Users can tune these thresholds in settings.",
+      "The privacy-first constraint shaped every architectural decision. There's no user account, no analytics endpoint, no crash reporter. Session data is stored locally with SQLite via better-sqlite3. When you uninstall FocusGuard, your data disappears with it. I think this is the right default for productivity software — your focus patterns are personal."
+    ]
+  },
+  {
+    slug: "lessons-from-six-projects-in-college",
+    title: "Lessons From Building Six Projects in College",
+    excerpt: "Honest reflections on what I learned shipping real projects as a CS student — from picking the right stack to knowing when to stop polishing and start shipping.",
+    date: "January 10, 2026",
+    readTime: "7 min read",
+    tags: ["Career", "Reflection", "Development"],
+    content: [
+      "When I started college, I thought the path to becoming a developer was straightforward: take the classes, learn the algorithms, get the internship. Four years later, the most valuable things I know came from projects I built outside the classroom.",
+      "The first lesson was counterintuitive: constraints make you more creative, not less. My best projects were born from a specific frustration or a hard limit — FocusGuard had to be private-by-default, Fillr had to work offline, CryptoBear had to run 24/7 on a $5/month VM. When you have infinite options, you spend forever designing. When you have constraints, you ship.",
+      "The second lesson: pick boring infrastructure, pick exciting problems. I wasted weeks early on chasing shiny new frameworks when Express.js or FastAPI would have been fine. The interesting part of FanTravels wasn't the tech stack — it was mapping fandom culture to UNESCO heritage sites using PostGIS geospatial queries. The infrastructure should disappear so the problem can shine.",
+      "Third: code reviews matter even when you're working alone. I started writing PR descriptions to myself — documenting what I changed and why — and it made me a noticeably better developer within a few months. Explaining your decisions, even in writing to no one, forces clarity.",
+      "Fourth: deploy early and keep it running. Half the learning happens after you ship. ClipCheck taught me more about model drift and real-world data quality in two weeks of production than months of local testing. CryptoBear taught me that error handling isn't optional when real money is on the line.",
+      "The last lesson is the most important: build things you'd actually use. I use Fillr every week. I have FocusGuard open while I write this. The projects that serve a real need for you personally are the ones you'll actually finish — and they're the ones that make the best portfolio pieces, because your enthusiasm for them is genuine."
+    ]
+  }
+];
+
 const Projects = () => {
   const data = allProjects.slice(0, 3);
 
@@ -395,6 +457,109 @@ const AllProjectsPage = () => {
         </div>
       </section>
       <Contact />
+      <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
+        © {new Date().getFullYear()} Designed & Coded with Passion
+      </footer>
+      <AIAssistant />
+    </main>
+  );
+};
+
+const BlogCard = ({ post }: { post: BlogPost }) => (
+  <Link to={`/blog/${post.slug}`} className="group block bg-[#111] border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500 overflow-hidden relative">
+    <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div className="relative z-10">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {post.tags.map(tag => (
+          <span key={tag} className="px-3 py-1 bg-white/5 text-gray-400 text-xs rounded-full font-mono">{tag}</span>
+        ))}
+      </div>
+      <h3 className="text-xl font-bold mb-3 group-hover:text-brand-purple transition-colors leading-snug">{post.title}</h3>
+      <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">{post.excerpt}</p>
+      <div className="flex items-center justify-between text-xs text-gray-600 font-mono">
+        <span>{post.date}</span>
+        <span>{post.readTime}</span>
+      </div>
+    </div>
+  </Link>
+);
+
+const BlogPage = () => {
+  const navigate = useNavigate();
+  return (
+    <main className="antialiased min-h-screen">
+      <Navbar />
+      <section className="pt-32 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-12"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+            Back to Home
+          </button>
+          <div className="mb-16">
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Blog</h1>
+            <p className="text-gray-400 text-lg">Thoughts on building software, AI, and the occasional late-night debugging session.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allPosts.map(post => <BlogCard key={post.slug} post={post} />)}
+          </div>
+        </div>
+      </section>
+      <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
+        © {new Date().getFullYear()} Designed & Coded with Passion
+      </footer>
+      <AIAssistant />
+    </main>
+  );
+};
+
+const BlogPostPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const post = allPosts.find(p => p.slug === slug);
+
+  if (!post) {
+    return (
+      <main className="antialiased min-h-screen flex flex-col items-center justify-center">
+        <Navbar />
+        <p className="text-gray-400 text-lg">Post not found.</p>
+        <button onClick={() => navigate('/blog')} className="mt-6 text-brand-purple hover:text-white transition-colors">← Back to Blog</button>
+      </main>
+    );
+  }
+
+  return (
+    <main className="antialiased min-h-screen">
+      <Navbar />
+      <article className="pt-32 pb-24 px-6">
+        <div className="max-w-2xl mx-auto">
+          <button
+            onClick={() => navigate('/blog')}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-12"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+            Back to Blog
+          </button>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {post.tags.map(tag => (
+              <span key={tag} className="px-3 py-1 bg-brand-purple/20 text-brand-purple text-xs rounded-full font-mono">{tag}</span>
+            ))}
+          </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">{post.title}</h1>
+          <div className="flex items-center gap-4 text-xs text-gray-600 font-mono mb-12 border-b border-white/5 pb-8">
+            <span>{post.date}</span>
+            <span>·</span>
+            <span>{post.readTime}</span>
+          </div>
+          <div className="space-y-6">
+            {post.content.map((paragraph, i) => (
+              <p key={i} className="text-gray-300 leading-relaxed text-lg">{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </article>
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
@@ -617,6 +782,24 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <section className="py-32 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div className="max-w-xl">
+              <h2 className="text-4xl font-extrabold mb-6">From the Blog</h2>
+              <p className="text-gray-400">Thoughts on building software, AI, and lessons learned along the way.</p>
+            </div>
+            <div className="h-px bg-white/10 flex-1 mx-8 hidden md:block mb-6"></div>
+            <Link to="/blog" className="text-brand-purple font-mono text-sm mb-6 hover:text-white transition-colors flex items-center gap-2">
+              VIEW ALL / {allPosts.length}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allPosts.map(post => <BlogCard key={post.slug} post={post} />)}
+          </div>
+        </div>
+      </section>
       <Contact />
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
@@ -632,6 +815,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<AllProjectsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
       </Routes>
     </BrowserRouter>
   );

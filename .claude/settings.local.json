@@ -11,7 +11,9 @@
       "Bash(gh run list:*)",
       "Bash(npm run build:*)",
       "WebFetch(domain:abelprasad.github.io)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)"
     ]
   }
 }
