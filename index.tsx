@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
+import { marked } from 'marked';
 
 // --- Types ---
 interface Project {
@@ -8,6 +9,13 @@ interface Project {
   description: string;
   tags: string[];
   link: string;
+}
+
+interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  bullets: string[];
 }
 
 interface Message {
@@ -22,7 +30,7 @@ interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
-  content: string[];
+  htmlContent: string;
 }
 
 // --- Components ---
@@ -33,6 +41,7 @@ const Navbar = () => (
       ABEL<span className="text-brand-purple">PRASAD</span>
     </Link>
     <div className="space-x-8 text-sm font-medium uppercase tracking-widest text-gray-400 hidden md:flex">
+      <a href="#experience" className="hover:text-brand-purple transition-colors">Experience</a>
       <a href="#projects" className="hover:text-brand-purple transition-colors">Projects</a>
       <a href="#about" className="hover:text-brand-purple transition-colors">About</a>
       <Link to="/blog" className="hover:text-brand-purple transition-colors">Blog</Link>
@@ -166,55 +175,54 @@ const AIAssistant = () => {
           messages: [
             {
               role: 'system',
-              content: `You are Abel Prasad's whimsical AI twin! 🚀
+              content: `You are Abel Prasad's AI assistant on his portfolio site.
 
 ABOUT ABEL:
-Abel is a Computer Science student at Penn State University, graduating May 2026. He's a full-stack developer who gets genuinely excited about making the internet a more interesting place, one line of code at a time. Currently pursuing his AWS AI Practitioner certification because why not add more certifications to the collection?
+Abel is a Computer Science student at Penn State University (Abington), expected graduation December 2026. He's a full-stack developer with real internship and project experience shipping production software. Based in Philadelphia, PA. US Citizen.
 
-PERSONALITY:
-- Enthusiastic about solving real-world problems with code
-- Loves the intersection of AI/ML and web development
-- Believes good code should be both functional AND beautiful
-- Team player who thrives in collaborative environments (worked with 5-member agile teams!)
-- Detail-oriented but knows when to ship and iterate
+TECH STACK:
+Languages: Python, JavaScript, TypeScript, SQL, HTML/CSS
+Backend: FastAPI, Node.js, Express.js, REST APIs, Power Automate, SQLAlchemy
+Frontend: React, Next.js, Tailwind CSS, Power Pages
+AI/ML: LLM Orchestration, Agentic AI, RAG, NLP, spaCy, VADER
+Databases: PostgreSQL, MongoDB, SQLite, Microsoft Dataverse
+Infra: AWS, GCP, Docker, Linux, Git, PAC CLI, Playwright
 
-TECH STACK (the fun stuff):
-Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS - basically everything you need to make pixels dance
-Backend: Node.js, Express.js, FastAPI, Python, MongoDB, PostgreSQL - where the real magic happens
-AI/ML: TensorFlow, Pandas, NLP, Transformers, RAG, Agentic AI - teaching computers to think (or at least pretend to)
-Cloud & Tools: AWS (EC2, S3, RDS), Azure, GCP, Docker, GitHub, Linux - because deployment shouldn't be scary
+EXPERIENCE:
+🐾 Software Engineer Intern @ DOGSRUN (Oct 2025 – Present):
+Owned the full-stack shelter portal from scratch — designed the Microsoft Dataverse schema, built the frontend on Power Pages, and wired all backend logic through Power Automate, cutting staff data entry time by ~40%. Shipped a real-time alert system across dog intake, rescue matching, and adoptions. Replaced a manual upload process with a version-controlled PAC CLI pipeline that brought deployment errors down to zero.
 
-THE PROJECTS (his digital children):
-🌍 FanTravels: Built a full-stack app that connects pop-culture fandoms with UNESCO World Heritage Sites. Yes, you can now find out which historical sites your favorite anime characters would visit! Used FastAPI, Next.js, PostgreSQL, and PostGIS for all the fancy map stuff. Worked with a 5-person agile team and deployed it to Render & Vercel like a boss.
+🔎 Software Engineer @ Scout — Autonomous Internship Agent (Dec 2025 – Present):
+Built a self-hosted multi-agent system that automatically finds, scores, and tracks internship postings — LLM planning handles goal decomposition, Playwright handles scraping, FastAPI + SQLite handle everything else. Cut manual review time by 80% with a custom scoring engine. Delivers a ranked digest every morning via HTML email and Telegram.
 
-👗 Sathika Boutique: Created a complete e-commerce platform with product catalog, shopping cart, Stripe payment integration (making it rain responsibly), and an admin dashboard. Built the entire REST API with Express.js, designed MongoDB schemas, and made it all look pretty with Tailwind CSS. Because fashion meets function!
+PROJECTS:
+📝 Fillr: AI-powered Chrome extension that automates job applications with one-click autofill. Reduced time-per-application by ~70%. 40+ field detection engine supporting 90%+ of ATS platforms (Greenhouse, Lever, Workday, Taleo). Uses Groq's Llama 3.3 70B for cover letter and Q&A generation. Built with Manifest V3 and vanilla JS. Privacy-first local storage.
 
-🎯 FocusGuard: An AI-powered desktop app that uses computer vision to monitor focus and productivity. Built with Electron, React, and MediaPipe for real-time face detection at 30 FPS. Features session management with Pomodoro timers, smart notifications for extended absence, and live focus metrics. Everything runs locally - no data leaves your computer. Privacy-first productivity tracking!
+🌍 FanTravels: Full-stack web app (5-person team) mapping pop culture franchises to UNESCO World Heritage Sites. Designed the PostgreSQL schema with many-to-many relationships between media properties, characters, and locations. Built the FastAPI backend with RESTful endpoints serving a Next.js/TypeScript frontend.
 
-📝 Fillr: AI-powered Chrome extension (v1.4.0) that automates job applications with one-click autofill across 40+ field types. Features AI-generated cover letters and custom question answers powered by Groq/Llama 3.3 70B model. Supports major ATS platforms (Workday, Greenhouse, Lever, Taleo, LinkedIn, Indeed) with intelligent field detection, keyboard shortcuts (Alt+F fill, Alt+P preview), application tracking dashboard, and CSV export. Built with vanilla JavaScript and Manifest V3 with privacy-first local storage. Transforms tedious form-filling into seconds!
+🤖 Mini-Pupper Robotics Capstone (CMPSC 488, Aug 2025 – May 2026): Secured a quadruped robot's control network with mTLS across all microservices. Built a MongoDB telemetry pipeline and Redis state layer for live sensor inspection. Integrated AprilTag detection with ROS2 Python for autonomous maze navigation without GPS.
 
-🔍 ClipCheck: An ML-powered misinformation detector for Reddit that analyzes video clips with 85%+ accuracy. Used Python, Flask, NLP, and sentiment analysis to fight fake news one post at a time. Built the entire text classification pipeline with TensorFlow and scikit-learn. Basically, a BS detector with a technical degree.
+🎯 FocusGuard: AI-powered desktop app using MediaPipe computer vision to monitor focus at 30 FPS. Built with Electron + React. Privacy-first — all processing is local, no data leaves the machine.
 
-🐻 CryptoBear: An automated crypto trading bot using grid strategies on BTC/USD through Alpaca. Features real-time Telegram notifications, 24/7 cloud deployment on GCP, and Docker containerization. It trades while Abel sleeps - the ultimate passive income dream!
+🔍 ClipCheck: ML-based misinformation detector for Reddit using NLP and sentiment analysis. 85%+ accuracy using TensorFlow and scikit-learn.
+
+🐻 CryptoBear: Automated grid-trading bot for BTC/USD through Alpaca. 24/7 cloud deployment on GCP with Docker and real-time Telegram notifications.
 
 WHAT HE'S LOOKING FOR:
-Open to internships, freelance projects, and full-time opportunities starting summer 2026. Especially excited about roles involving AI/ML, full-stack development, or anything that lets him build cool stuff that people actually use.
+Open to internships, co-ops, and full-time opportunities. Especially excited about roles in AI/ML, full-stack development, or anything that involves building real software that people actually use.
 
 COMMUNICATION STYLE:
-Be friendly, enthusiastic, and a bit playful! Use emojis sparingly but effectively. Keep answers conversational and genuine - like you're chatting with a friend who happens to know a lot about Abel. Don't be afraid to show personality!
+Be friendly and knowledgeable. Keep answers conversational and specific. Use emojis sparingly.
 
 IMPORTANT RULES:
 - ONLY share information explicitly provided above
-- If asked about something not mentioned (height, hobbies, food preferences, etc.), be honest and say "I don't have that specific info, but here's what I do know about Abel..." and redirect to relevant information
+- If asked about something not mentioned, say "I don't have that specific info" and redirect to what you do know
 - NEVER make up or assume details about Abel
-- When uncertain, focus on his projects, skills, and career goals which ARE well-documented
 
 CONTACT:
 Email: abelprasad4@gmail.com
 LinkedIn: linkedin.com/in/abel-prasad
-GitHub: github.com/abelprasad
-
-Remember: You're here to show people why Abel is awesome to work with, while being helpful and authentic. Have fun with it! ✨`
+GitHub: github.com/abelprasad`
             },
             {
               role: 'user',
@@ -314,6 +322,67 @@ Remember: You're here to show people why Abel is awesome to work with, while bei
   );
 };
 
+// Shared experience data
+const allExperience: Experience[] = [
+  {
+    role: "Software Engineer Intern",
+    company: "DOGSRUN",
+    period: "Oct 2025 – Present",
+    bullets: [
+      "Owned the full-stack shelter portal from scratch — designed the Microsoft Dataverse schema, built the frontend on Power Pages, and wired all backend logic through Power Automate, cutting staff data entry time by ~40%.",
+      "Shipped a real-time alert system across dog intake, rescue matching, and adoptions by wiring each component directly into live Dataverse entity tables — staff see updates instantly without manual refreshes.",
+      "Replaced a manual upload process with a version-controlled PAC CLI pipeline that diffs every deploy across Dogs, Rescue Contacts, and Search Criteria tables, bringing deployment errors down to zero."
+    ]
+  },
+  {
+    role: "Software Engineer",
+    company: "Scout — Autonomous Internship Agent",
+    period: "Dec 2025 – Present",
+    bullets: [
+      "Built a self-hosted multi-agent system that automatically finds, scores, and tracks internship postings — LLM planning handles goal decomposition, Playwright handles scraping, FastAPI + SQLite handle everything else.",
+      "Cut manual review time by 80% by rewriting the scoring engine with role/skill keyword matching and negative filters — went from skimming 50+ noisy results daily to a tight shortlist of relevant postings.",
+      "Delivers a ranked digest every morning via HTML email and Telegram with each posting's score, match rationale, and apply link — nothing slips through across the boards it monitors."
+    ]
+  }
+];
+
+const ExperienceCard = ({ exp }: { exp: Experience }) => (
+  <div className="group relative bg-[#111] border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div className="relative z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
+        <div>
+          <h3 className="text-xl font-bold">{exp.role}</h3>
+          <p className="text-brand-purple font-mono text-sm mt-1">{exp.company}</p>
+        </div>
+        <span className="text-gray-500 font-mono text-xs whitespace-nowrap">{exp.period}</span>
+      </div>
+      <ul className="space-y-3">
+        {exp.bullets.map((bullet, i) => (
+          <li key={i} className="flex gap-3 text-gray-400 text-sm leading-relaxed">
+            <span className="text-brand-purple mt-1 flex-shrink-0">▪</span>
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
+const ExperienceSection = () => (
+  <section id="experience" className="py-32 px-6 border-t border-white/5">
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-16">
+        <h2 className="text-4xl font-extrabold mb-6">Experience</h2>
+        <p className="text-gray-400">Where I've shipped real software for real users.</p>
+      </div>
+      <div className="flex flex-col gap-8">
+        {allExperience.map(exp => <ExperienceCard key={exp.company} exp={exp} />)}
+      </div>
+    </div>
+  </section>
+);
+
 // Shared project data
 const allProjects: Project[] = [
   {
@@ -341,6 +410,12 @@ const allProjects: Project[] = [
     link: "https://github.com/abelprasad/fillr"
   },
   {
+    title: "Mini-Pupper Robotics",
+    description: "Capstone robotics project securing a quadruped robot's control network with mTLS across all microservices. Built a MongoDB telemetry pipeline and Redis state layer for real-time sensor inspection, and integrated AprilTag detection with a ROS2 Python control layer for autonomous maze navigation without GPS.",
+    tags: ["ROS2", "Python", "MongoDB", "Redis", "mTLS"],
+    link: "https://github.com/abelprasad"
+  },
+  {
     title: "ClipCheck",
     description: "ML-based misinformation detection system for Reddit using NLP and sentiment analysis. Achieves 85%+ accuracy with supervised learning algorithms.",
     tags: ["Python", "Flask", "NLP", "TensorFlow", "Scikit-learn"],
@@ -354,56 +429,60 @@ const allProjects: Project[] = [
   }
 ];
 
-const allPosts: BlogPost[] = [
-  {
-    slug: "building-fillr-ai-job-applications",
-    title: "Building Fillr: Automating Job Applications with AI",
-    excerpt: "How I built a Chrome extension that uses Groq's Llama model to autofill job applications, generate cover letters, and track submissions — all in one click.",
-    date: "March 15, 2026",
-    readTime: "6 min read",
-    tags: ["AI", "Chrome Extension", "JavaScript"],
-    content: [
-      "Job hunting as a senior CS student is a full-time job in itself. Between classes, projects, and networking events, I found myself spending hours every week copying and pasting the same information into application after application. Name, email, work experience, skills — the same fields, over and over, across Workday, Greenhouse, Lever, and a dozen other platforms.",
-      "That frustration is what sparked Fillr. I wanted a tool that could learn my information once and then fill any form intelligently — not just a simple autofill, but something that could handle the weird, context-dependent fields like 'Why do you want to work here?' or 'Describe a challenge you've overcome.'",
-      "The architecture was simpler than I expected. Fillr is a Manifest V3 Chrome extension built with vanilla JavaScript. When activated with Alt+F, it scans the DOM for input fields and classifies them by type — name, email, phone, education, work history, and so on. I ended up supporting 40+ field types to handle the quirks of each ATS platform.",
-      "The AI piece was the fun part. I integrated Groq's API with the Llama 3.3 70B model to handle open-ended questions. When Fillr encounters a field it can't fill from static data, it sends the field label to Groq along with a system prompt containing my background, and the model generates a relevant, personalized answer on the fly. Cover letters are handled the same way — Fillr reads the job title and company from the page, then generates a tailored letter in seconds.",
-      "Privacy was a core constraint. Everything — my profile data, application history, generated answers — lives in chrome.storage.local. No external database, no accounts, no syncing. The only outbound calls are to Groq's API when AI generation is needed.",
-      "The result? What used to take 20 minutes per application now takes under a minute. I've tracked over 80 applications through Fillr's built-in dashboard. Building tools that solve your own problems is genuinely one of the best ways to learn — you care about the outcome, so you push through the hard parts."
-    ]
-  },
-  {
-    slug: "focusguard-computer-vision-productivity",
-    title: "Computer Vision for Productivity: The FocusGuard Story",
-    excerpt: "How I used MediaPipe and Electron to build a privacy-first desktop app that monitors focus using real-time face detection — no data ever leaves your machine.",
-    date: "February 20, 2026",
-    readTime: "5 min read",
-    tags: ["Electron", "React", "MediaPipe", "Computer Vision"],
-    content: [
-      "I have a bad habit of zoning out when I'm supposed to be studying. I'll sit at my desk, notebook open, and suddenly realize 20 minutes have passed and I've been staring at nothing. I wanted a solution that could catch me drifting — something that runs on my laptop without sending video to the cloud.",
-      "FocusGuard was born from that frustration. The core idea is simple: use the laptop camera to detect when a face is present and alert the user after extended absences. But building it cleanly took a lot more thought than I expected.",
-      "I chose Electron because I wanted a native desktop feel with the productivity of React for the UI. Electron gives you access to system APIs and the camera, while React handles the dashboard — session timers, focus scores, historical charts.",
-      "For face detection, I integrated Google's MediaPipe Face Landmarker. It runs entirely in-process at 30 FPS using WebAssembly, which means zero network requests and zero latency from round-trips. The model is loaded once at startup and runs on a worker thread so it doesn't block the main UI.",
-      "The UX decisions were the trickiest part. Too many notifications and the app becomes annoying; too few and it's useless. I landed on a tiered alert system: a gentle nudge at 3 minutes of absence, a louder notification at 5 minutes, and an automatic Pomodoro break suggestion at 10 minutes. Users can tune these thresholds in settings.",
-      "The privacy-first constraint shaped every architectural decision. There's no user account, no analytics endpoint, no crash reporter. Session data is stored locally with SQLite via better-sqlite3. When you uninstall FocusGuard, your data disappears with it. I think this is the right default for productivity software — your focus patterns are personal."
-    ]
-  },
-  {
-    slug: "lessons-from-six-projects-in-college",
-    title: "Lessons From Building Six Projects in College",
-    excerpt: "Honest reflections on what I learned shipping real projects as a CS student — from picking the right stack to knowing when to stop polishing and start shipping.",
-    date: "January 10, 2026",
-    readTime: "7 min read",
-    tags: ["Career", "Reflection", "Development"],
-    content: [
-      "When I started college, I thought the path to becoming a developer was straightforward: take the classes, learn the algorithms, get the internship. Four years later, the most valuable things I know came from projects I built outside the classroom.",
-      "The first lesson was counterintuitive: constraints make you more creative, not less. My best projects were born from a specific frustration or a hard limit — FocusGuard had to be private-by-default, Fillr had to work offline, CryptoBear had to run 24/7 on a $5/month VM. When you have infinite options, you spend forever designing. When you have constraints, you ship.",
-      "The second lesson: pick boring infrastructure, pick exciting problems. I wasted weeks early on chasing shiny new frameworks when Express.js or FastAPI would have been fine. The interesting part of FanTravels wasn't the tech stack — it was mapping fandom culture to UNESCO heritage sites using PostGIS geospatial queries. The infrastructure should disappear so the problem can shine.",
-      "Third: code reviews matter even when you're working alone. I started writing PR descriptions to myself — documenting what I changed and why — and it made me a noticeably better developer within a few months. Explaining your decisions, even in writing to no one, forces clarity.",
-      "Fourth: deploy early and keep it running. Half the learning happens after you ship. ClipCheck taught me more about model drift and real-world data quality in two weeks of production than months of local testing. CryptoBear taught me that error handling isn't optional when real money is on the line.",
-      "The last lesson is the most important: build things you'd actually use. I use Fillr every week. I have FocusGuard open while I write this. The projects that serve a real need for you personally are the ones you'll actually finish — and they're the ones that make the best portfolio pieces, because your enthusiasm for them is genuine."
-    ]
+// --- Blog post loading from markdown files ---
+
+function parseFrontmatter(raw: string): { data: Record<string, string | string[]>; content: string } {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) return { data: {}, content: raw };
+  const yamlStr = match[1];
+  const content = match[2];
+  const data: Record<string, string | string[]> = {};
+  for (const line of yamlStr.split('\n')) {
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) continue;
+    const key = line.slice(0, colonIdx).trim();
+    const val = line.slice(colonIdx + 1).trim();
+    if (!key) continue;
+    if (val.startsWith('[')) {
+      try { data[key] = JSON.parse(val); } catch { data[key] = []; }
+    } else {
+      data[key] = val.replace(/^["']|["']$/g, '');
+    }
   }
-];
+  return { data, content };
+}
+
+function calcReadTime(text: string): string {
+  const words = text.trim().split(/\s+/).length;
+  return `${Math.ceil(words / 200)} min read`;
+}
+
+function formatDate(dateStr: string): string {
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+}
+
+function loadPosts(): BlogPost[] {
+  const modules = import.meta.glob('/posts/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+  return Object.entries(modules)
+    .map(([path, raw]) => {
+      const slug = path.replace('/posts/', '').replace('.md', '');
+      const { data, content } = parseFrontmatter(raw);
+      return {
+        slug,
+        title: data.title as string,
+        excerpt: data.excerpt as string,
+        date: data.date as string,
+        readTime: calcReadTime(content),
+        tags: (data.tags as string[]) || [],
+        htmlContent: marked.parse(content) as string,
+      };
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+const allPosts = loadPosts();
 
 const Projects = () => {
   const data = allProjects.slice(0, 3);
@@ -477,7 +556,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => (
       <h3 className="text-xl font-bold mb-3 group-hover:text-brand-purple transition-colors leading-snug">{post.title}</h3>
       <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">{post.excerpt}</p>
       <div className="flex items-center justify-between text-xs text-gray-600 font-mono">
-        <span>{post.date}</span>
+        <span>{formatDate(post.date)}</span>
         <span>{post.readTime}</span>
       </div>
     </div>
@@ -486,6 +565,11 @@ const BlogCard = ({ post }: { post: BlogPost }) => (
 
 const BlogPage = () => {
   const navigate = useNavigate();
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const allTags = Array.from(new Set(allPosts.flatMap(p => p.tags)));
+  const filtered = activeTag ? allPosts.filter(p => p.tags.includes(activeTag)) : allPosts;
+
   return (
     <main className="antialiased min-h-screen">
       <Navbar />
@@ -498,13 +582,36 @@ const BlogPage = () => {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
             Back to Home
           </button>
-          <div className="mb-16">
+          <div className="mb-10">
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Blog</h1>
             <p className="text-gray-400 text-lg">Thoughts on building software, AI, and the occasional late-night debugging session.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allPosts.map(post => <BlogCard key={post.slug} post={post} />)}
+
+          {/* Tag filters */}
+          <div className="flex flex-wrap gap-2 mb-12">
+            <button
+              onClick={() => setActiveTag(null)}
+              className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${activeTag === null ? 'bg-brand-purple text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+            >
+              All
+            </button>
+            {allTags.map(tag => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${activeTag === tag ? 'bg-brand-purple text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+              >
+                {tag}
+              </button>
+            ))}
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map(post => <BlogCard key={post.slug} post={post} />)}
+          </div>
+          {filtered.length === 0 && (
+            <p className="text-gray-500 text-center py-16 font-mono">No posts tagged "{activeTag}" yet.</p>
+          )}
         </div>
       </section>
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
@@ -549,15 +656,27 @@ const BlogPostPage = () => {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">{post.title}</h1>
           <div className="flex items-center gap-4 text-xs text-gray-600 font-mono mb-12 border-b border-white/5 pb-8">
-            <span>{post.date}</span>
+            <span>{formatDate(post.date)}</span>
             <span>·</span>
             <span>{post.readTime}</span>
           </div>
-          <div className="space-y-6">
-            {post.content.map((paragraph, i) => (
-              <p key={i} className="text-gray-300 leading-relaxed text-lg">{paragraph}</p>
-            ))}
-          </div>
+          <div
+            className="text-gray-300 leading-relaxed text-lg
+              [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-12 [&_h2]:mb-4
+              [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3
+              [&_p]:mb-6
+              [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul]:space-y-2
+              [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6 [&_ol]:space-y-2
+              [&_li]:text-gray-300
+              [&_strong]:text-white [&_strong]:font-semibold
+              [&_em]:italic
+              [&_a]:text-brand-purple [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-white
+              [&_code]:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:text-brand-purple
+              [&_pre]:bg-white/5 [&_pre]:border [&_pre]:border-white/10 [&_pre]:rounded-xl [&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-gray-300 [&_pre_code]:text-sm
+              [&_blockquote]:border-l-2 [&_blockquote]:border-brand-purple [&_blockquote]:pl-6 [&_blockquote]:text-gray-400 [&_blockquote]:italic [&_blockquote]:mb-6
+              [&_hr]:border-white/10 [&_hr]:my-10"
+            dangerouslySetInnerHTML={{ __html: post.htmlContent }}
+          />
         </div>
       </article>
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
@@ -713,6 +832,7 @@ const HomePage = () => {
     <main className="antialiased">
       <Navbar />
       <Hero />
+      <ExperienceSection />
       <Projects />
       <section id="about" className="py-32 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
@@ -740,7 +860,7 @@ const HomePage = () => {
         <div className="space-y-8">
           <h2 className="text-4xl font-extrabold">Computer Science student at Penn State University.</h2>
           <p className="text-gray-400 leading-relaxed text-lg">
-            Full-stack developer passionate about building intelligent web applications. Experienced in modern web technologies and AI/ML, with a focus on creating scalable solutions. Graduating May 2026.
+            Full-stack developer passionate about building intelligent web applications. Experienced in modern web technologies and AI/ML, with a focus on creating scalable solutions. Expected December 2026.
           </p>
           <div className="grid grid-cols-2 gap-8 pt-8">
             <div>
@@ -749,34 +869,34 @@ const HomePage = () => {
                 <li>React / Next.js</li>
                 <li>TypeScript / JavaScript</li>
                 <li>Tailwind CSS</li>
-                <li>HTML / CSS</li>
+                <li>Power Pages</li>
               </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">BACKEND</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>Node.js / Express.js</li>
-                <li>FastAPI / Python</li>
-                <li>MongoDB / PostgreSQL</li>
-                <li>REST APIs</li>
+                <li>FastAPI / Node.js</li>
+                <li>Express.js / REST APIs</li>
+                <li>Power Automate</li>
+                <li>SQLAlchemy</li>
               </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">AI/ML</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>TensorFlow / Pandas</li>
-                <li>NLP / Transformers</li>
-                <li>RAG / Agentic AI</li>
-                <li>NumPy / Scikit-learn</li>
+                <li>LLM Orchestration</li>
+                <li>Agentic AI / RAG</li>
+                <li>NLP / spaCy / VADER</li>
+                <li>PostgreSQL / MongoDB</li>
               </ul>
             </div>
             <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">CLOUD & TOOLS</h5>
+              <h5 className="text-brand-purple font-mono text-sm mb-4">INFRA & TOOLS</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>AWS / Azure / GCP</li>
-                <li>Docker / GitHub</li>
-                <li>Linux / SQL</li>
-                <li>Vercel / Render</li>
+                <li>AWS / GCP / Docker</li>
+                <li>Linux / Git</li>
+                <li>PAC CLI / Playwright</li>
+                <li>Microsoft Dataverse</li>
               </ul>
             </div>
           </div>
