@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
 import { marked } from 'marked';
@@ -16,11 +16,6 @@ interface Experience {
   company: string;
   period: string;
   bullets: string[];
-}
-
-interface Message {
-  role: 'user' | 'assistant';
-  text: string;
 }
 
 interface BlogPost {
@@ -51,7 +46,6 @@ const Navbar = () => (
 );
 
 const Hero = () => {
-  // Generate random stars
   const stars = Array.from({ length: 150 }, (_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
@@ -63,7 +57,6 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden bg-black">
-      {/* Animated Stars */}
       {stars.map(star => (
         <div
           key={star.id}
@@ -79,37 +72,35 @@ const Hero = () => {
         />
       ))}
 
-      {/* Shooting Stars */}
       <div className="absolute top-20 right-20 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '0s' }}></div>
       <div className="absolute top-40 right-60 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '4s' }}></div>
       <div className="absolute top-60 left-40 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '8s' }}></div>
 
-      {/* Background Glows */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] animate-pulse-slow"></div>
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-darkPurple/10 rounded-full blur-[120px] animate-pulse-slow delay-700"></div>
 
-    <div className="relative z-10 text-center max-w-4xl">
-      <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Full-Stack Developer & AI Enthusiast</p>
-      <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-tight">
-        Building <span className="text-gradient">intelligent solutions</span> that matter.
-      </h1>
-      <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-        Computer Science student passionate about full-stack development and AI/ML. Experienced in React, Node.js, Python, and cloud technologies.
-      </p>
-      <div className="flex gap-4 justify-center flex-wrap">
-        <a href="#projects" className="px-8 py-4 bg-brand-purple hover:bg-brand-darkPurple text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-purple/20">
-          Explore Projects
-        </a>
-        <a href="/resume.pdf" download className="px-8 py-4 bg-white/10 border border-white/20 hover:border-brand-purple hover:bg-white/20 text-white font-bold rounded-full transition-all flex items-center gap-2">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          Resume
-        </a>
-        <a href="#contact" className="px-8 py-4 bg-transparent border border-white/10 hover:border-brand-purple text-white font-bold rounded-full transition-all">
-          Get in Touch
-        </a>
+      <div className="relative z-10 text-center max-w-4xl">
+        <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Full-Stack Developer</p>
+        <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-tight">
+          Building <span className="text-gradient">intelligent solutions</span> that matter.
+        </h1>
+        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          CS student at Penn State Abington. Associate Software Engineer at Ascensus. I build full-stack systems with Java, Spring Boot, Angular, and whatever else gets the job done.
+        </p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <a href="#projects" className="px-8 py-4 bg-brand-purple hover:bg-brand-darkPurple text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-purple/20">
+            Explore Projects
+          </a>
+          <a href="/resume.pdf" download className="px-8 py-4 bg-white/10 border border-white/20 hover:border-brand-purple hover:bg-white/20 text-white font-bold rounded-full transition-all flex items-center gap-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            Resume
+          </a>
+          <a href="#contact" className="px-8 py-4 bg-transparent border border-white/10 hover:border-brand-purple text-white font-bold rounded-full transition-all">
+            Get in Touch
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };
 
@@ -140,190 +131,16 @@ const ProjectCard = ({ project }: { project: Project }) => (
   </div>
 );
 
-const AIAssistant = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', text: "Hi! I'm Abel's AI assistant. Ask me anything about his projects, skills, or experience!" }
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const userMessage = input;
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
-          messages: [
-            {
-              role: 'system',
-              content: `You are Abel Prasad's AI assistant on his portfolio site.
-
-ABOUT ABEL:
-Abel is a Computer Science student at Penn State University (Abington), expected graduation December 2026. He's a full-stack developer with real internship and project experience shipping production software. Based in Philadelphia, PA. US Citizen.
-
-TECH STACK:
-Languages: Python, JavaScript, TypeScript, SQL, HTML/CSS
-Backend: FastAPI, Node.js, Express.js, REST APIs, Power Automate, SQLAlchemy
-Frontend: React, Next.js, Tailwind CSS, Power Pages
-AI/ML: LLM Orchestration, Agentic AI, RAG, NLP, spaCy, VADER
-Databases: PostgreSQL, MongoDB, SQLite, Microsoft Dataverse
-Infra: AWS, GCP, Docker, Linux, Git, PAC CLI, Playwright
-
-EXPERIENCE:
-🐾 Software Engineer Intern @ DOGSRUN (Oct 2025 – Present):
-Owned the full-stack shelter portal from scratch — designed the Microsoft Dataverse schema, built the frontend on Power Pages, and wired all backend logic through Power Automate, cutting staff data entry time by ~40%. Shipped a real-time alert system across dog intake, rescue matching, and adoptions. Replaced a manual upload process with a version-controlled PAC CLI pipeline that brought deployment errors down to zero.
-
-🔎 Software Engineer @ Scout — Autonomous Internship Agent (Dec 2025 – Present):
-Built a self-hosted multi-agent system that automatically finds, scores, and tracks internship postings — LLM planning handles goal decomposition, Playwright handles scraping, FastAPI + SQLite handle everything else. Cut manual review time by 80% with a custom scoring engine. Delivers a ranked digest every morning via HTML email and Telegram.
-
-PROJECTS:
-📝 Fillr: AI-powered Chrome extension that automates job applications with one-click autofill. Reduced time-per-application by ~70%. 40+ field detection engine supporting 90%+ of ATS platforms (Greenhouse, Lever, Workday, Taleo). Uses Groq's Llama 3.3 70B for cover letter and Q&A generation. Built with Manifest V3 and vanilla JS. Privacy-first local storage.
-
-🌍 FanTravels: Full-stack web app (5-person team) mapping pop culture franchises to UNESCO World Heritage Sites. Designed the PostgreSQL schema with many-to-many relationships between media properties, characters, and locations. Built the FastAPI backend with RESTful endpoints serving a Next.js/TypeScript frontend.
-
-🤖 Mini-Pupper Robotics Capstone (CMPSC 488, Aug 2025 – May 2026): Secured a quadruped robot's control network with mTLS across all microservices. Built a MongoDB telemetry pipeline and Redis state layer for live sensor inspection. Integrated AprilTag detection with ROS2 Python for autonomous maze navigation without GPS.
-
-🎯 FocusGuard: AI-powered desktop app using MediaPipe computer vision to monitor focus at 30 FPS. Built with Electron + React. Privacy-first — all processing is local, no data leaves the machine.
-
-🔍 ClipCheck: ML-based misinformation detector for Reddit using NLP and sentiment analysis. 85%+ accuracy using TensorFlow and scikit-learn.
-
-🐻 CryptoBear: Automated grid-trading bot for BTC/USD through Alpaca. 24/7 cloud deployment on GCP with Docker and real-time Telegram notifications.
-
-WHAT HE'S LOOKING FOR:
-Open to internships, co-ops, and full-time opportunities. Especially excited about roles in AI/ML, full-stack development, or anything that involves building real software that people actually use.
-
-COMMUNICATION STYLE:
-Be friendly and knowledgeable. Keep answers conversational and specific. Use emojis sparingly.
-
-IMPORTANT RULES:
-- ONLY share information explicitly provided above
-- If asked about something not mentioned, say "I don't have that specific info" and redirect to what you do know
-- NEVER make up or assume details about Abel
-
-CONTACT:
-Email: abelprasad4@gmail.com
-LinkedIn: linkedin.com/in/abel-prasad
-GitHub: github.com/abelprasad`
-            },
-            {
-              role: 'user',
-              content: userMessage
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 500
-        })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error('Groq API Error:', data);
-        throw new Error(data.error?.message || 'API request failed');
-      }
-
-      const aiResponse = data.choices?.[0]?.message?.content || "I'm sorry, I couldn't process that request.";
-
-      setMessages(prev => [...prev, { role: 'assistant', text: aiResponse }]);
-    } catch (error) {
-      console.error('AI Error:', error);
-      setMessages(prev => [...prev, { role: 'assistant', text: "Connection error. Please try again later." }]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="fixed bottom-8 right-8 z-[100]">
-      {isOpen ? (
-        <div className="w-[350px] md:w-[400px] h-[500px] bg-[#111] border border-white/10 rounded-3xl flex flex-col shadow-2xl overflow-hidden transition-all duration-300">
-          <div className="p-6 border-b border-white/5 flex justify-between items-center bg-brand-purple/5">
-            <h4 className="font-bold flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              AI Assistant
-            </h4>
-            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-          </div>
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4">
-            {messages.map((m, i) => (
-              <div key={i} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                {m.role === 'assistant' && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-purple to-brand-darkPurple flex items-center justify-center animate-pulse-slow">
-                    <div className="w-6 h-6 rounded-full border-2 border-white/30 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
-                    </div>
-                  </div>
-                )}
-                <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${m.role === 'user' ? 'bg-brand-purple text-white rounded-br-none' : 'bg-white/5 text-gray-300 rounded-bl-none border border-white/5'}`}>
-                  {m.text}
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-purple to-brand-darkPurple flex items-center justify-center animate-spin-slow">
-                  <div className="w-6 h-6 rounded-full border-2 border-white/30 border-t-white"></div>
-                </div>
-                <div className="bg-white/5 text-gray-500 px-4 py-3 rounded-2xl rounded-bl-none border border-white/5 text-xs">
-                  <span className="animate-pulse">AI is thinking...</span>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="p-4 bg-brand-black border-t border-white/5">
-            <div className="relative">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask me anything..."
-                className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-brand-purple transition-all pr-12"
-              />
-              <button 
-                onClick={handleSend}
-                disabled={isLoading}
-                className="absolute right-2 top-1.5 p-2 text-brand-purple hover:text-white disabled:opacity-50 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 bg-brand-purple rounded-full flex items-center justify-center shadow-xl shadow-brand-purple/20 hover:scale-110 active:scale-95 transition-all glow-purple"
-        >
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-        </button>
-      )}
-    </div>
-  );
-};
-
 // Shared experience data
 const allExperience: Experience[] = [
+  {
+    role: "Associate Software Engineer",
+    company: "Ascensus",
+    period: "Jul 2026 – Present",
+    bullets: [
+      "Full-stack engineer on the Application Development team in Dresher, PA, working across the stack while completing a CS degree at Penn State Abington.",
+    ]
+  },
   {
     role: "Software Engineer Intern",
     company: "DOGSRUN",
@@ -386,22 +203,22 @@ const ExperienceSection = () => (
 // Shared project data
 const allProjects: Project[] = [
   {
-    title: "FanTravels",
-    description: "Full-stack web app connecting pop-culture fandom with UNESCO World Heritage Sites. Features user check-ins, posts, badges, and geolocation mapping with PostGIS.",
-    tags: ["FastAPI", "Next.js", "PostgreSQL", "PostGIS", "Tailwind"],
-    link: "https://github.com/abelprasad/Fan-Travels"
+    title: "SENTINEL",
+    description: "Defense-focused flight intelligence platform. Ingests live ADS-B data, correlates aircraft with threat databases, and visualizes airspace activity on an interactive map. Built for real operational use cases in defense and airspace monitoring.",
+    tags: ["Java 21", "Spring Boot", "Angular", "PostgreSQL", "Groq", "Docker"],
+    link: "https://sentinel.abelprasad.dev/public"
   },
   {
-    title: "Sathika Boutique",
-    description: "Full-stack e-commerce platform with product catalog, shopping cart, checkout flow, and Stripe payment integration. Includes admin dashboard for inventory management.",
-    tags: ["Next.js", "MongoDB", "Express.js", "Stripe", "TypeScript"],
-    link: "https://github.com/abelprasad/SathikaBoutique"
+    title: "DOGSRUN",
+    description: "Dog Shelter & Rescue Unification Network — nonprofit platform connecting shelters and rescues across the country. Features 501(c)(3) org approval flows, 150+ PG County dogs with enriched profiles, real-time alert system, full admin portal, and a hardened API with 45/45 security tests passing.",
+    tags: ["Next.js 15", "Supabase", "Resend", "Vercel", "Sentry"],
+    link: "https://dogsrun.org"
   },
   {
-    title: "FocusGuard",
-    description: "AI-powered desktop application that monitors focus and productivity using computer vision. Real-time face detection with session management and smart notifications, all processing locally for privacy.",
-    tags: ["Electron", "React", "MediaPipe", "TypeScript", "Vite"],
-    link: "https://github.com/abelprasad/FocusGuard"
+    title: "Scout",
+    description: "Self-hosted multi-agent internship detection and outreach system. Crawls GitHub internship repos, scores 2,700+ listings against a custom rubric (location, stack, title, AI focus), delivers a ranked daily digest via HTML email and Telegram, and auto cold-emails high-scoring companies via Gmail SMTP with resume attached.",
+    tags: ["FastAPI", "SQLite", "Playwright", "Ollama", "Python"],
+    link: "https://github.com/abelprasad"
   },
   {
     title: "Fillr",
@@ -414,6 +231,18 @@ const allProjects: Project[] = [
     description: "Capstone robotics project securing a quadruped robot's control network with mTLS across all microservices. Built a MongoDB telemetry pipeline and Redis state layer for real-time sensor inspection, and integrated AprilTag detection with a ROS2 Python control layer for autonomous maze navigation without GPS.",
     tags: ["ROS2", "Python", "MongoDB", "Redis", "mTLS"],
     link: "https://github.com/abelprasad"
+  },
+  {
+    title: "FanTravels",
+    description: "Full-stack web app connecting pop-culture fandom with UNESCO World Heritage Sites. Features user check-ins, posts, badges, and geolocation mapping with PostGIS.",
+    tags: ["FastAPI", "Next.js", "PostgreSQL", "PostGIS", "Tailwind"],
+    link: "https://github.com/abelprasad/Fan-Travels"
+  },
+  {
+    title: "FocusGuard",
+    description: "AI-powered desktop application that monitors focus and productivity using computer vision. Real-time face detection with session management and smart notifications, all processing locally for privacy.",
+    tags: ["Electron", "React", "MediaPipe", "TypeScript", "Vite"],
+    link: "https://github.com/abelprasad/FocusGuard"
   },
   {
     title: "ClipCheck",
@@ -527,7 +356,7 @@ const AllProjectsPage = () => {
 
           <div className="mb-16">
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6">All Projects</h1>
-            <p className="text-gray-400 text-lg">A comprehensive collection of my work in full-stack development and AI/ML.</p>
+            <p className="text-gray-400 text-lg">A comprehensive collection of my work in full-stack development.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -539,7 +368,6 @@ const AllProjectsPage = () => {
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
-      <AIAssistant />
     </main>
   );
 };
@@ -587,7 +415,6 @@ const BlogPage = () => {
             <p className="text-gray-400 text-lg">Thoughts on building software, AI, and the occasional late-night debugging session.</p>
           </div>
 
-          {/* Tag filters */}
           <div className="flex flex-wrap gap-2 mb-12">
             <button
               onClick={() => setActiveTag(null)}
@@ -617,7 +444,6 @@ const BlogPage = () => {
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
-      <AIAssistant />
     </main>
   );
 };
@@ -682,7 +508,6 @@ const BlogPostPage = () => {
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
-      <AIAssistant />
     </main>
   );
 };
@@ -724,12 +549,11 @@ const Contact = () => {
         <div className="text-center mb-16">
           <h2 className="text-5xl font-extrabold mb-8">Let's build something <span className="text-brand-purple">extraordinary.</span></h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Open to internships, freelance projects, and collaboration opportunities.
+            Open to collaboration, freelance projects, and connecting with other builders.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
@@ -789,7 +613,6 @@ const Contact = () => {
             )}
           </form>
 
-          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
@@ -837,20 +660,13 @@ const HomePage = () => {
       <section id="about" className="py-32 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <div className="aspect-[4/5] bg-white/5 rounded-3xl relative overflow-hidden group border border-white/5 hover:border-brand-purple/50 transition-all duration-700">
-            {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
-            
-            {/* The Headshot Image */}
             <img
               src="/headshot.jpg"
               alt="Abel Prasad Headshot"
               className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
             />
-
-            {/* Glowing Accent */}
             <div className="absolute inset-0 bg-brand-purple/20 opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none"></div>
-            
-            {/* Decorative Label */}
             <div className="absolute bottom-8 left-8 z-30 transform group-hover:translate-x-2 transition-transform duration-500">
               <span className="text-brand-purple font-mono text-xs tracking-[0.3em] uppercase block mb-1">Lead Creative</span>
               <span className="text-white font-extrabold text-2xl tracking-tighter">THE DEVELOPER</span>
@@ -858,45 +674,45 @@ const HomePage = () => {
           </div>
         </div>
         <div className="space-y-8">
-          <h2 className="text-4xl font-extrabold">Computer Science student at Penn State University.</h2>
+          <h2 className="text-4xl font-extrabold">CS student at Penn State Abington. Associate Software Engineer at Ascensus.</h2>
           <p className="text-gray-400 leading-relaxed text-lg">
-            Full-stack developer passionate about building intelligent web applications. Experienced in modern web technologies and AI/ML, with a focus on creating scalable solutions. Expected December 2026.
+            Full-stack developer building production systems. My stack is Java 21, Spring Boot, Angular, PostgreSQL, and Docker. I also work in TypeScript, Python, and whatever the job needs. Expected December 2026.
           </p>
           <div className="grid grid-cols-2 gap-8 pt-8">
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">FRONTEND</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
+                <li>Angular</li>
                 <li>React / Next.js</li>
                 <li>TypeScript / JavaScript</li>
                 <li>Tailwind CSS</li>
-                <li>Power Pages</li>
               </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">BACKEND</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
+                <li>Java 21 / Spring Boot</li>
                 <li>FastAPI / Node.js</li>
                 <li>Express.js / REST APIs</li>
                 <li>Power Automate</li>
-                <li>SQLAlchemy</li>
               </ul>
             </div>
             <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">AI/ML</h5>
+              <h5 className="text-brand-purple font-mono text-sm mb-4">DATABASES</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>LLM Orchestration</li>
-                <li>Agentic AI / RAG</li>
-                <li>NLP / spaCy / VADER</li>
-                <li>PostgreSQL / MongoDB</li>
+                <li>PostgreSQL</li>
+                <li>MongoDB</li>
+                <li>Supabase</li>
+                <li>Microsoft Dataverse</li>
               </ul>
             </div>
             <div>
               <h5 className="text-brand-purple font-mono text-sm mb-4">INFRA & TOOLS</h5>
               <ul className="text-gray-400 space-y-2 text-sm">
-                <li>AWS / GCP / Docker</li>
-                <li>Linux / Git</li>
-                <li>PAC CLI / Playwright</li>
-                <li>Microsoft Dataverse</li>
+                <li>Docker / Linux / Git</li>
+                <li>AWS / GCP</li>
+                <li>Cloudflare / Tailscale</li>
+                <li>Playwright / PAC CLI</li>
               </ul>
             </div>
           </div>
@@ -924,7 +740,6 @@ const HomePage = () => {
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
         © {new Date().getFullYear()} Designed & Coded with Passion
       </footer>
-      <AIAssistant />
     </main>
   );
 };
