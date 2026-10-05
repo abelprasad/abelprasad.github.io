@@ -31,7 +31,7 @@ const BlogPage = () => {
           <div className="flex flex-wrap gap-2 mb-12">
             <button
               onClick={() => setActiveTag(null)}
-              className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${activeTag === null ? 'bg-brand-purple text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+              className={`px-4 py-1.5 rounded-none text-xs font-mono transition-all ${activeTag === null ? 'bg-brand-green text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
             >
               All
             </button>
@@ -39,7 +39,7 @@ const BlogPage = () => {
               <button
                 key={tag}
                 onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${activeTag === tag ? 'bg-brand-purple text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+                className={`px-4 py-1.5 rounded-none text-xs font-mono transition-all ${activeTag === tag ? 'bg-brand-green text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
               >
                 {tag}
               </button>
