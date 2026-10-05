@@ -12,9 +12,9 @@ import { allProjects } from '../data/projects';
 import { allPosts } from '../data/posts';
 
 const stackGroups: [string, string[]][] = [
-  ["AI / LLM", ["Ollama", "Groq", "LLM APIs", "RAG", "Agents"]],
+  ["AI / LLM", ["AI Agents", "LLM API Integration", "Ollama", "Groq", "OpenAI", "RAG", "Vector Databases", "Multi-Agent Pipelines", "Prompt Engineering"]],
   ["LANGUAGES", ["Java", "Python", "TypeScript", "SQL"]],
-  ["BACKEND", ["Spring Boot", "FastAPI", "Node.js", "REST"]],
+  ["BACKEND", ["Spring Boot", "FastAPI", "Node.js", "REST", "Microservices", "System Design"]],
   ["FRONTEND", ["React", "Next.js", "Angular", "Tailwind"]],
   ["DATA & INFRA", ["PostgreSQL", "Supabase", "SQLite", "Docker", "AWS", "Tailscale", "Linux"]],
   ["AI WORKFLOW", ["Claude", "Cursor", "Muse"]],

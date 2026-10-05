@@ -23,7 +23,7 @@ export const allProjects: Project[] = [
   {
     title: "DOGSRUN",
     description: "Shelter-to-rescue matching platform for a real nonprofit, live in production. 150+ dogs, shelter and rescue registration flows, 501(c)(3) approval pipeline, alert matching engine, admin portal. Hardened API — 45/45 tests passing.",
-    tags: ["Next.js 15", "Supabase", "TypeScript", "Vercel"],
+    tags: ["Next.js 16", "Supabase", "TypeScript", "Vercel"],
     link: "https://dogsrun.org"
   },
   {

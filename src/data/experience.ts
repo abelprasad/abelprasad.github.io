@@ -22,7 +22,7 @@ export const allExperience: Experience[] = [
     company: "DOGSRUN",
     period: "Feb 2026 — Jun 2026",
     bullets: [
-      "Rebuilt the shelter portal from scratch on Next.js 15 and Supabase — migrated 150+ PG County dogs with enriched profiles and zero downtime.",
+      "Rebuilt the shelter portal from scratch on Next.js 16 and Supabase — migrated 150+ PG County dogs with enriched profiles and zero downtime.",
       "Shipped a digest-based alert system across intake, rescue matching, and adoptions wired into Supabase realtime.",
       "Hardened the API with a full Playwright test suite — 45/45 passing across auth, org approval flows, and alert delivery."
     ]
