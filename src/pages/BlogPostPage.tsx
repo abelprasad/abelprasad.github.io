@@ -13,7 +13,7 @@ const BlogPostPage = () => {
       <main className="antialiased min-h-screen flex flex-col items-center justify-center">
         <Navbar />
         <p className="text-gray-400 text-lg">Post not found.</p>
-        <button onClick={() => navigate('/blog')} className="mt-6 text-brand-purple hover:text-white transition-colors">← Back to Blog</button>
+        <button onClick={() => navigate('/blog')} className="mt-6 text-brand-green hover:text-white transition-colors">← Back to Blog</button>
       </main>
     );
   }
@@ -32,7 +32,7 @@ const BlogPostPage = () => {
           </button>
           <div className="flex flex-wrap gap-2 mb-6">
             {post.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 bg-brand-purple/20 text-brand-purple text-xs rounded-full font-mono">{tag}</span>
+              <span key={tag} className="px-3 py-1 bg-brand-green/20 text-brand-green text-xs rounded-none font-mono">{tag}</span>
             ))}
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">{post.title}</h1>
@@ -51,10 +51,10 @@ const BlogPostPage = () => {
               [&_li]:text-gray-300
               [&_strong]:text-white [&_strong]:font-semibold
               [&_em]:italic
-              [&_a]:text-brand-purple [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-white
-              [&_code]:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:text-brand-purple
-              [&_pre]:bg-white/5 [&_pre]:border [&_pre]:border-white/10 [&_pre]:rounded-xl [&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-gray-300 [&_pre_code]:text-sm
-              [&_blockquote]:border-l-2 [&_blockquote]:border-brand-purple [&_blockquote]:pl-6 [&_blockquote]:text-gray-400 [&_blockquote]:italic [&_blockquote]:mb-6
+              [&_a]:text-brand-green [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-white
+              [&_code]:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:text-brand-green
+              [&_pre]:bg-white/5 [&_pre]:border [&_pre]:border-white/10 [&_pre]:rounded-none [&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-gray-300 [&_pre_code]:text-sm
+              [&_blockquote]:border-l-2 [&_blockquote]:border-brand-green [&_blockquote]:pl-6 [&_blockquote]:text-gray-400 [&_blockquote]:italic [&_blockquote]:mb-6
               [&_hr]:border-white/10 [&_hr]:my-10"
             dangerouslySetInnerHTML={{ __html: post.htmlContent }}
           />
