@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const BOOT_LINES = [
-  'indra v2.1.0 \u2014 secure shell session established',
+  'indra v2.1.0 — secure shell session established',
   '> loading profile: abel_prasad ............ OK',
   '> mounting /dev/projects ................. OK',
   '> whoami',
@@ -53,7 +53,7 @@ const Hero = () => {
           </h1>
           <p className="text-brand-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
             Associate Software Engineer at <span className="text-brand-darkGreen font-semibold">Ascensus</span>.
-            Flight intelligence, autonomous agents, nonprofit platforms \u2014
+            Flight intelligence, autonomous agents, nonprofit platforms —
             designed, deployed, and self-hosted.
           </p>
 
@@ -74,7 +74,7 @@ const Hero = () => {
             {[
               ["BASE", "PHILADELPHIA, PA"],
               ["ROLE", "ASSOC. SWE @ ASCENSUS"],
-              ["EDUCATION", "PENN STATE CS \u2014 DEC 2026"],
+              ["EDUCATION", "PENN STATE CS — DEC 2026"],
               ["FOCUS", "SHIPPED SYSTEMS"],
             ].map(([k, v]) => (
               <div key={k} className="bg-white px-5 py-4">

@@ -61,12 +61,12 @@ const About = () => (
             Associate Software Engineer at Ascensus. CS at Penn State Abington, graduating December 2026.
           </p>
           <p className="text-brand-muted leading-relaxed">
-            I build production systems \u2014 flight intelligence, nonprofit platforms,
-            autonomous agents \u2014 and self-host everything on my own hardware. No demos that
+            I build production systems — flight intelligence, nonprofit platforms,
+            autonomous agents — and self-host everything on my own hardware. No demos that
             only run on localhost. If it is not deployed, it does not count.
           </p>
           <p className="text-brand-muted leading-relaxed">
-            Generalist by design: Java, Python, TypeScript \u2014 whatever the system needs.
+            Generalist by design: Java, Python, TypeScript — whatever the system needs.
             I care about software that works in production, for real users.
           </p>
           <div className="flex gap-4 flex-wrap pt-2">
@@ -130,7 +130,7 @@ const HomePage = () => {
                 <span className="text-brand-darkGreen"> abel@indra</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
                 <span className="text-brand-ink">cat transmission.log</span>
               </p>
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">From the Log</h2>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">From the Blog</h2>
             </div>
             <Link to="/blog" className="font-mono text-brand-darkGreen text-xs tracking-[0.2em] hover:text-green-800 transition-colors flex items-center gap-2 shrink-0">
               VIEW ALL / {allPosts.length}

@@ -36,9 +36,9 @@ const Contact = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-5"><span className="text-gray-600">06</span><span className="text-gray-600"> // </span>OPEN CHANNEL</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Let\u2019s <span className="text-brand-green">talk.</span></h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Let’s <span className="text-brand-green">talk.</span></h2>
           <p className="text-brand-muted text-lg max-w-2xl mx-auto">
-            Associate SWE at Ascensus. If you\u2019re building real systems for real users \u2014 let\u2019s talk.
+            Associate SWE at Ascensus. If you’re building real systems for real users — let’s talk.
           </p>
         </div>
 
