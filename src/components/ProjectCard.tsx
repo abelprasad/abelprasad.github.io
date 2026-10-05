@@ -1,5 +1,6 @@
 import React from 'react';
 import { Project } from '../data/projects';
+import { CornerTicks, TrafficLights } from './Texture';
 
 interface Props {
   project: Project;
@@ -23,7 +24,14 @@ const ProjectCard = ({ project, index }: Props) => {
       <>
         <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-brand-green via-brand-green/40 to-transparent"></div>
         <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
-        <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-8 items-center">
+        <div className="relative z-10 flex items-center gap-3 border-b border-brand-line bg-brand-black/70 px-6 py-2.5 md:px-12">
+          <TrafficLights />
+          <span className="truncate font-mono text-[11px] tracking-[0.25em] text-brand-muted">
+            {project.title.toLowerCase()} — flagship // live system
+          </span>
+          <span className="status-dot ml-auto inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green text-brand-green"></span>
+        </div>
+        <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-8 items-center p-8 md:p-12">
           <div>
             <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-4">
               <span className="text-gray-600">{index}</span> // FLAGSHIP SYSTEM
@@ -45,12 +53,15 @@ const ProjectCard = ({ project, index }: Props) => {
           )}
         </div>
       </>,
-      "card-hover group relative block bg-brand-panel border border-brand-green/30 p-8 md:p-12 mb-8 overflow-hidden"
+      "card-hover group relative block bg-brand-panel border border-brand-green/30 mb-8 overflow-hidden"
     );
   }
 
   return wrap(
     <>
+      <span className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <CornerTicks />
+      </span>
       <div className="flex justify-between items-start mb-6">
         <span className="font-mono text-gray-600 text-xs tracking-[0.3em]">{index}</span>
         {project.link && <ArrowIcon cls="w-5 h-5 text-gray-600 group-hover:text-brand-green transition-colors" />}

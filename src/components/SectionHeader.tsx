@@ -23,8 +23,8 @@ const SectionHeader = ({ index, label, title, description }: Props) => {
       </p>
       <h2 className="font-mono text-4xl md:text-5xl font-extrabold tracking-tight">{title}</h2>
       {description && <p className="text-brand-muted mt-5 max-w-xl leading-relaxed">{description}</p>}
-      <p className="font-mono text-gray-700 text-xs mt-6 select-none" aria-hidden="true">
-        {'-'.repeat(48)}
+      <p className="font-mono text-brand-green/60 text-xs mt-6 select-none whitespace-nowrap overflow-hidden" aria-hidden="true">
+        {'─'.repeat(64)}
       </p>
     </div>
   );

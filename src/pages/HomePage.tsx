@@ -7,26 +7,27 @@ import { ExperienceSection } from '../components/ExperienceCard';
 import ProjectCard from '../components/ProjectCard';
 import BlogCard from '../components/BlogCard';
 import Contact from '../components/Contact';
+import { Ticker, CornerTicks } from '../components/Texture';
 import { allProjects } from '../data/projects';
 import { allPosts } from '../data/posts';
 
 const stackGroups: [string, string[]][] = [
+  ["AI / LLM", ["Ollama", "Groq", "LLM APIs", "RAG", "Agents"]],
   ["LANGUAGES", ["Java", "Python", "TypeScript", "SQL"]],
   ["BACKEND", ["Spring Boot", "FastAPI", "Node.js", "REST"]],
   ["FRONTEND", ["React", "Next.js", "Angular", "Tailwind"]],
-  ["DATA", ["PostgreSQL", "Supabase", "SQLite"]],
-  ["AI SYSTEMS", ["Ollama", "LLM Orchestration", "RAG", "Groq"]],
-  ["INFRA", ["Docker", "AWS", "Tailscale", "Linux"]],
+  ["DATA & INFRA", ["PostgreSQL", "Supabase", "SQLite", "Docker", "AWS", "Tailscale", "Linux"]],
+  ["AI WORKFLOW", ["Claude", "Cursor", "Muse"]],
 ];
 
 const Stack = () => (
-  <section id="stack" className="py-24 md:py-32 px-6 border-t border-brand-line">
+  <section id="stack" className="py-24 md:py-32 px-6 border-t border-brand-line scroll-mt-20">
     <div className="max-w-7xl mx-auto">
       <SectionHeader index="03" label="ARSENAL" title="Stack"
-        description="Production tooling, not tutorial toys. Everything below has shipped in a real system." />
+        description="The AI stack and production tooling behind the systems above. Everything below has shipped in a real system." />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-brand-line border border-brand-line">
         {stackGroups.map(([group, items]) => (
-          <div key={group} className="bg-white p-6">
+          <div key={group} className="bg-white p-6 transition-colors hover:bg-brand-dim/60">
             <p className="font-mono text-brand-darkGreen text-[11px] tracking-[0.3em] mb-5">{group}</p>
             <ul className="space-y-2.5">
               {items.map(item => (
@@ -46,6 +47,7 @@ const About = () => (
       <SectionHeader index="04" label="OPERATOR" title="About" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
         <div className="relative overflow-hidden border border-brand-line group max-w-md">
+          <CornerTicks />
           <img
             src="/headshot.jpg"
             alt="Abel Prasad"
@@ -68,6 +70,10 @@ const About = () => (
           <p className="text-brand-muted leading-relaxed">
             Generalist by design: Java, Python, TypeScript — whatever the system needs.
             I care about software that works in production, for real users.
+          </p>
+          <p className="font-mono text-sm text-brand-muted border-l-2 border-brand-green/60 pl-4 leading-relaxed">
+            <span className="text-brand-darkGreen">$</span> AI-native workflow — Claude, Cursor,
+            and local LLMs in the loop on every build. The tools change; the shipping doesn&apos;t.
           </p>
           <div className="flex gap-4 flex-wrap pt-2">
             <a href="https://github.com/abelprasad" target="_blank" rel="noopener noreferrer"
@@ -93,9 +99,10 @@ const HomePage = () => {
     <main className="antialiased">
       <Navbar />
       <Hero />
+      <Ticker />
       <ExperienceSection />
 
-      <section id="projects" className="py-24 md:py-32 px-6 border-t border-brand-line">
+      <section id="projects" className="py-24 md:py-32 px-6 border-t border-brand-line bg-blueprint scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
             <div>
@@ -121,7 +128,7 @@ const HomePage = () => {
       <Stack />
       <About />
 
-      <section className="py-24 md:py-32 px-6 border-t border-brand-line">
+      <section className="py-24 md:py-32 px-6 border-t border-brand-line bg-dots-soft">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
             <div>

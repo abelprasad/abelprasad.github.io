@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TerminalPanel } from './Texture';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -32,17 +33,18 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 bg-brand-green/5 border-t border-brand-line">
+    <section id="contact" className="py-32 px-6 bg-brand-green/5 bg-dots border-t border-brand-line scroll-mt-20">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-5"><span className="text-gray-600">06</span><span className="text-gray-600"> // </span>OPEN CHANNEL</p>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Let’s <span className="text-brand-green">talk.</span></h2>
           <p className="text-brand-muted text-lg max-w-2xl mx-auto">
-            Associate SWE at Ascensus. If you’re building real systems for real users — let’s talk.
+            Associate SWE at Ascensus building AI systems. If you’re building real systems for real users — let’s talk.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
+          <TerminalPanel title="compose — new transmission" bodyClassName="p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-brand-ink mb-2">Name</label>
@@ -101,6 +103,7 @@ const Contact = () => {
               <p className="text-red-700 text-sm text-center">Oops! Something went wrong. Please try again or email directly.</p>
             )}
           </form>
+          </TerminalPanel>
 
           <div className="space-y-8">
             <div>
