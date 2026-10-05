@@ -38,7 +38,7 @@ const Hero = () => {
               {line}
             </p>
           ))}
-          {!done && <span className="blink text-brand-green">\u2588</span>}
+          {!done && <span className="blink text-brand-green">█</span>}
         </div>
 
         <div style={{ opacity: done ? 1 : 0.25, transition: 'opacity 0.4s' }}>
@@ -49,7 +49,7 @@ const Hero = () => {
           <h1 className="font-mono text-5xl md:text-8xl font-extrabold tracking-tighter leading-[1.02] mb-8">
             I build systems<br />
             that <span className="text-brand-green">ship.</span>
-            <span className="blink text-brand-green">\u2588</span>
+            <span className="blink text-brand-green">█</span>
           </h1>
           <p className="text-brand-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
             Associate Software Engineer at <span className="text-brand-darkGreen font-semibold">Ascensus</span>.

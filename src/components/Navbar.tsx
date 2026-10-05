@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center backdrop-blur-md bg-brand-black/70 border-b border-brand-line">
       <Link to="/" className="font-mono text-sm font-bold tracking-[0.15em] hover:text-brand-green transition-colors">
-        <span className="text-brand-darkGreen">abel@indra</span><span className="text-brand-muted">:~$</span><span className="blink text-brand-green">\u2588</span>
+        <span className="text-brand-darkGreen">abel@indra</span><span className="text-brand-muted">:~$</span><span className="blink text-brand-green">█</span>
       </Link>
       <div className="flex items-center gap-6">
         <div className="space-x-8 text-xs font-mono uppercase tracking-[0.2em] text-brand-muted hidden md:flex">
