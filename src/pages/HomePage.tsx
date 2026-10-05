@@ -101,7 +101,7 @@ const HomePage = () => {
             <div>
               <p className="font-mono text-xs md:text-sm mb-5">
                 <span className="text-gray-600">[</span><span className="text-brand-darkGreen">02</span><span className="text-gray-600">]</span>
-                <span className="text-brand-darkGreen"> abel@indra</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
+                <span className="text-brand-darkGreen"> abel@portfolio</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
                 <span className="text-brand-ink">cat deployed-systems.log</span>
               </p>
               <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Projects</h2>
@@ -127,7 +127,7 @@ const HomePage = () => {
             <div>
               <p className="font-mono text-xs md:text-sm mb-5">
                 <span className="text-gray-600">[</span><span className="text-brand-darkGreen">05</span><span className="text-gray-600">]</span>
-                <span className="text-brand-darkGreen"> abel@indra</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
+                <span className="text-brand-darkGreen"> abel@portfolio</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
                 <span className="text-brand-ink">cat transmission.log</span>
               </p>
               <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">From the Blog</h2>

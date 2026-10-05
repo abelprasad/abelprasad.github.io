@@ -15,7 +15,7 @@ const SectionHeader = ({ index, label, title, description }: Props) => {
         <span className="text-gray-600">[</span>
         <span className="text-brand-darkGreen">{index}</span>
         <span className="text-gray-600">]</span>
-        <span className="text-brand-darkGreen"> abel@indra</span>
+        <span className="text-brand-darkGreen"> abel@portfolio</span>
         <span className="text-gray-600">:</span>
         <span className="text-brand-muted">~/portfolio</span>
         <span className="text-gray-600">$ </span>

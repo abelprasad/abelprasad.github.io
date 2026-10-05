@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const BOOT_LINES = [
-  'indra v2.1.0 — secure shell session established',
+  'portfolio v2.1.0 — secure shell session established',
   '> loading profile: abel_prasad ............ OK',
   '> mounting /dev/projects ................. OK',
   '> whoami',
