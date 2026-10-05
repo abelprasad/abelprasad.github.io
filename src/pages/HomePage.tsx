@@ -7,7 +7,7 @@ import { ExperienceSection } from '../components/ExperienceCard';
 import ProjectCard from '../components/ProjectCard';
 import BlogCard from '../components/BlogCard';
 import Contact from '../components/Contact';
-import { Ticker, CornerTicks } from '../components/Texture';
+import { CornerTicks } from '../components/Texture';
 import { allProjects } from '../data/projects';
 import { allPosts } from '../data/posts';
 
@@ -71,10 +71,6 @@ const About = () => (
             Generalist by design: Java, Python, TypeScript — whatever the system needs.
             I care about software that works in production, for real users.
           </p>
-          <p className="font-mono text-sm text-brand-muted border-l-2 border-brand-green/60 pl-4 leading-relaxed">
-            <span className="text-brand-darkGreen">$</span> AI-native workflow — Claude, Cursor,
-            and local LLMs in the loop on every build. The tools change; the shipping doesn&apos;t.
-          </p>
           <div className="flex gap-4 flex-wrap pt-2">
             <a href="https://github.com/abelprasad" target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 border border-brand-line hover:border-brand-green font-mono text-xs tracking-[0.2em] transition-colors">
@@ -99,7 +95,6 @@ const HomePage = () => {
     <main className="antialiased">
       <Navbar />
       <Hero />
-      <Ticker />
       <ExperienceSection />
 
       <section id="projects" className="py-24 md:py-32 px-6 border-t border-brand-line bg-blueprint scroll-mt-20">
