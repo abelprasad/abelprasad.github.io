@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import SectionHeader from '../components/SectionHeader';
 import { ExperienceSection } from '../components/ExperienceCard';
 import ProjectCard from '../components/ProjectCard';
 import BlogCard from '../components/BlogCard';
@@ -9,120 +10,144 @@ import Contact from '../components/Contact';
 import { allProjects } from '../data/projects';
 import { allPosts } from '../data/posts';
 
-const Projects = () => {
-  const data = allProjects.slice(0, 3);
+const stackGroups: [string, string[]][] = [
+  ["LANGUAGES", ["Java", "Python", "TypeScript", "SQL"]],
+  ["BACKEND", ["Spring Boot", "FastAPI", "Node.js", "REST"]],
+  ["FRONTEND", ["React", "Next.js", "Angular", "Tailwind"]],
+  ["DATA", ["PostgreSQL", "Supabase", "SQLite"]],
+  ["AI SYSTEMS", ["Ollama", "LLM Orchestration", "RAG", "Groq"]],
+  ["INFRA", ["Docker", "AWS", "Tailscale", "Linux"]],
+];
 
-  return (
-    <section id="projects" className="py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-xl">
-            <h2 className="text-4xl font-extrabold mb-6">Featured Projects</h2>
-            <p className="text-gray-400">Selected works that showcase technical expertise and design sensibility.</p>
+const Stack = () => (
+  <section id="stack" className="py-24 md:py-32 px-6 border-t border-white/5">
+    <div className="max-w-7xl mx-auto">
+      <SectionHeader index="03" label="ARSENAL" title="Stack"
+        description="Production tooling, not tutorial toys. Everything below has shipped in a real system." />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10">
+        {stackGroups.map(([group, items]) => (
+          <div key={group} className="bg-brand-black p-6">
+            <p className="font-mono text-brand-purple text-[11px] tracking-[0.3em] mb-5">{group}</p>
+            <ul className="space-y-2.5">
+              {items.map(item => (
+                <li key={item} className="text-gray-300 text-sm">{item}</li>
+              ))}
+            </ul>
           </div>
-          <div className="h-px bg-white/10 flex-1 mx-8 hidden md:block mb-6"></div>
-          <Link to="/projects" className="text-brand-purple font-mono text-sm mb-6 hover:text-white transition-colors flex items-center gap-2">
-            VIEW ALL / {allProjects.length}
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
-          </Link>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const About = () => (
+  <section id="about" className="py-24 md:py-32 px-6 border-t border-white/5">
+    <div className="max-w-7xl mx-auto">
+      <SectionHeader index="04" label="OPERATOR" title="About" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="relative overflow-hidden border border-white/10 group max-w-md">
+          <img
+            src="/headshot.jpg"
+            alt="Abel Prasad"
+            className="w-full aspect-[4/5] object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-700"
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+            <p className="font-mono text-brand-purple text-[11px] tracking-[0.3em] mb-1">ABEL PRASAD</p>
+            <p className="font-mono text-gray-500 text-[11px] tracking-[0.2em]">PHILADELPHIA, PA</p>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.map(p => <ProjectCard key={p.title} project={p} />)}
+        <div className="space-y-6">
+          <p className="text-xl md:text-2xl font-bold leading-snug tracking-tight">
+            Associate Software Engineer at Ascensus. CS at Penn State Abington, graduating December 2026.
+          </p>
+          <p className="text-gray-400 leading-relaxed">
+            I build production systems \u2014 defense flight intelligence, nonprofit platforms,
+            autonomous agents \u2014 and self-host everything on my own hardware. No demos that
+            only run on localhost. If it is not deployed, it does not count.
+          </p>
+          <p className="text-gray-400 leading-relaxed">
+            Long-term vector: software engineering in <span className="text-white font-semibold">defense and aerospace</span>.
+            The systems that matter most are the ones that cannot fail.
+          </p>
+          <div className="flex gap-4 flex-wrap pt-2">
+            <a href="https://github.com/abelprasad" target="_blank" rel="noopener noreferrer"
+              className="px-6 py-3 border border-white/20 hover:border-brand-purple font-mono text-xs tracking-[0.2em] transition-colors">
+              GITHUB
+            </a>
+            <a href="https://www.linkedin.com/in/abel-prasad/" target="_blank" rel="noopener noreferrer"
+              className="px-6 py-3 border border-white/20 hover:border-brand-purple font-mono text-xs tracking-[0.2em] transition-colors">
+              LINKEDIN
+            </a>
+          </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 const HomePage = () => {
+  const featured = allProjects.filter(p => p.flagship);
+  const rest = allProjects.filter(p => !p.flagship).slice(0, 3);
+
   return (
     <main className="antialiased">
       <Navbar />
       <Hero />
       <ExperienceSection />
-      <Projects />
-      <section id="about" className="py-32 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div>
-          <div className="aspect-[4/5] bg-white/5 rounded-3xl relative overflow-hidden group border border-white/5 hover:border-brand-purple/50 transition-all duration-700">
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
-            <img
-              src="/headshot.jpg"
-              alt="Abel Prasad Headshot"
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
-            />
-            <div className="absolute inset-0 bg-brand-purple/20 opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none"></div>
-            <div className="absolute bottom-8 left-8 z-30 transform group-hover:translate-x-2 transition-transform duration-500">
-              <span className="text-brand-purple font-mono text-xs tracking-[0.3em] uppercase block mb-1">Lead Creative</span>
-              <span className="text-white font-extrabold text-2xl tracking-tighter">THE DEVELOPER</span>
+
+      <section id="projects" className="py-24 md:py-32 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
+            <div>
+              <p className="font-mono text-brand-purple text-xs md:text-sm tracking-[0.35em] mb-5">
+                <span className="text-gray-600">02</span><span className="text-gray-600"> // </span>DEPLOYED SYSTEMS
+              </p>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Projects</h2>
             </div>
+            <Link to="/projects" className="font-mono text-brand-purple text-xs tracking-[0.2em] hover:text-white transition-colors flex items-center gap-2 shrink-0">
+              VIEW ALL / {allProjects.length}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+            </Link>
           </div>
-        </div>
-        <div className="space-y-8">
-          <h2 className="text-4xl font-extrabold">Full-stack developer. CS student at Penn State Abington, graduating December 2026.</h2>
-          <p className="text-gray-400 leading-relaxed text-lg">
-            I build production systems, not demos. My shipped stack spans TypeScript, Python, and Java — React, Next.js, FastAPI, Spring Boot, Supabase, PostgreSQL. Starting as an Associate Software Engineer at Ascensus in July 2026 while finishing my degree.
-          </p>
-          <div className="grid grid-cols-2 gap-8 pt-8">
-            <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">FRONTEND</h5>
-              <ul className="text-gray-400 space-y-2 text-sm">
-                <li>Angular</li>
-                <li>React / Next.js</li>
-                <li>TypeScript / JavaScript</li>
-                <li>Tailwind CSS</li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">BACKEND</h5>
-              <ul className="text-gray-400 space-y-2 text-sm">
-                <li>Java 21 / Spring Boot</li>
-                <li>FastAPI / Node.js</li>
-                <li>Express.js / REST APIs</li>
-                <li>Power Automate</li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">DATABASES</h5>
-              <ul className="text-gray-400 space-y-2 text-sm">
-                <li>PostgreSQL</li>
-                <li>MongoDB</li>
-                <li>Supabase</li>
-                <li>Microsoft Dataverse</li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-brand-purple font-mono text-sm mb-4">INFRA & TOOLS</h5>
-              <ul className="text-gray-400 space-y-2 text-sm">
-                <li>Docker / Linux / Git</li>
-                <li>AWS / GCP</li>
-                <li>Cloudflare / Tailscale</li>
-                <li>Playwright / PAC CLI</li>
-              </ul>
-            </div>
+          {featured.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 1)} />)}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rest.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 2)} />)}
           </div>
         </div>
       </section>
-      <section className="py-32 px-6 border-t border-white/5">
+
+      <Stack />
+      <About />
+
+      <section className="py-24 md:py-32 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="max-w-xl">
-              <h2 className="text-4xl font-extrabold mb-6">From the Blog</h2>
-              <p className="text-gray-400">Thoughts on building software, AI, and lessons learned along the way.</p>
+          <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
+            <div>
+              <p className="font-mono text-brand-purple text-xs md:text-sm tracking-[0.35em] mb-5">
+                <span className="text-gray-600">05</span><span className="text-gray-600"> // </span>TRANSMISSION LOG
+              </p>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">From the Log</h2>
             </div>
-            <div className="h-px bg-white/10 flex-1 mx-8 hidden md:block mb-6"></div>
-            <Link to="/blog" className="text-brand-purple font-mono text-sm mb-6 hover:text-white transition-colors flex items-center gap-2">
+            <Link to="/blog" className="font-mono text-brand-purple text-xs tracking-[0.2em] hover:text-white transition-colors flex items-center gap-2 shrink-0">
               VIEW ALL / {allPosts.length}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allPosts.map(post => <BlogCard key={post.slug} post={post} />)}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allPosts.slice(0, 3).map(post => <BlogCard key={post.slug} post={post} />)}
           </div>
         </div>
       </section>
+
       <Contact />
-      <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-white/5 uppercase tracking-[0.2em]">
-        © {new Date().getFullYear()} Designed & Coded with Passion
+      <footer className="py-10 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-mono text-[11px] tracking-[0.3em] text-gray-600">ABEL PRASAD // {new Date().getFullYear()}</p>
+          <p className="font-mono text-[11px] tracking-[0.2em] text-gray-600 flex items-center gap-2">
+            <span className="status-dot inline-block w-1.5 h-1.5 rounded-full bg-brand-purple text-brand-purple"></span>
+            ALL SYSTEMS NOMINAL
+          </p>
+        </div>
       </footer>
     </main>
   );

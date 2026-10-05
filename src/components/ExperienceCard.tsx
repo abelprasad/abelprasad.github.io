@@ -1,21 +1,24 @@
 import React from 'react';
 import { Experience, allExperience } from '../data/experience';
 
-export const ExperienceCard = ({ exp }: { exp: Experience }) => (
-  <div className="group relative bg-[#111] border border-white/5 rounded-2xl p-8 hover:border-brand-purple/50 transition-all duration-500 overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-    <div className="relative z-10">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
+const ExperienceCard = ({ exp }: { exp: Experience }) => (
+  <div className="relative pl-10 md:pl-14 pb-12 last:pb-0">
+    <span className="absolute left-0 top-1.5 w-2.5 h-2.5 bg-brand-purple"></span>
+    <span className="absolute left-[4px] top-6 bottom-0 w-px bg-white/10"></span>
+    <div className="card-hover bg-brand-panel border border-white/10 p-7 md:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-5">
         <div>
-          <h3 className="text-xl font-bold">{exp.role}</h3>
-          <p className="text-brand-purple font-mono text-sm mt-1">{exp.company}</p>
+          <h3 className="text-xl font-bold tracking-tight">{exp.role}</h3>
+          <p className="font-mono text-brand-purple text-sm mt-1.5">
+            {exp.company}{exp.location ? <span className="text-gray-600"> // {exp.location}</span> : null}
+          </p>
         </div>
-        <span className="text-gray-500 font-mono text-xs whitespace-nowrap">{exp.period}</span>
+        <span className="font-mono text-gray-500 text-xs tracking-[0.2em] whitespace-nowrap">{exp.period}</span>
       </div>
       <ul className="space-y-3">
         {exp.bullets.map((bullet, i) => (
           <li key={i} className="flex gap-3 text-gray-400 text-sm leading-relaxed">
-            <span className="text-brand-purple mt-1 flex-shrink-0">▪</span>
+            <span className="text-brand-purple font-mono flex-shrink-0">&gt;</span>
             <span>{bullet}</span>
           </li>
         ))}
@@ -25,13 +28,15 @@ export const ExperienceCard = ({ exp }: { exp: Experience }) => (
 );
 
 export const ExperienceSection = () => (
-  <section id="experience" className="py-32 px-6 border-t border-white/5">
+  <section id="experience" className="py-24 md:py-32 px-6 border-t border-white/5">
     <div className="max-w-7xl mx-auto">
-      <div className="mb-16">
-        <h2 className="text-4xl font-extrabold mb-6">Experience</h2>
-        <p className="text-gray-400">Where I've shipped real software for real users.</p>
+      <div className="mb-14">
+        <p className="font-mono text-brand-purple text-xs md:text-sm tracking-[0.35em] mb-5">
+          <span className="text-gray-600">01</span><span className="text-gray-600"> // </span>SERVICE RECORD
+        </p>
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Experience</h2>
       </div>
-      <div className="flex flex-col gap-8">
+      <div className="max-w-4xl">
         {allExperience.map(exp => <ExperienceCard key={exp.company} exp={exp} />)}
       </div>
     </div>

@@ -22,12 +22,13 @@ const AllProjectsPage = () => {
           </button>
 
           <div className="mb-16">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6">All Projects</h1>
-            <p className="text-gray-400 text-lg">A comprehensive collection of my work in full-stack development.</p>
+            <p className="font-mono text-brand-purple text-xs tracking-[0.35em] mb-5">// FULL INVENTORY</p>
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">All Projects</h1>
+            <p className="text-gray-400 text-lg">Every system below was designed, built, and deployed \u2014 no localhost-only demos.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProjects.map(p => <ProjectCard key={p.title} project={p} />)}
+            {allProjects.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 1)} />)}
           </div>
         </div>
       </section>

@@ -1,58 +1,57 @@
 import React from 'react';
 
 const Hero = () => {
-  const stars = Array.from({ length: 150 }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 3}s`,
-    duration: `${2 + Math.random() * 3}s`,
-    size: Math.random() > 0.7 ? 2 : Math.random() > 0.4 ? 1.5 : 1
-  }));
-
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden bg-black">
-      {stars.map(star => (
-        <div
-          key={star.id}
-          className="absolute rounded-full bg-white animate-twinkle"
-          style={{
-            left: star.left,
-            top: star.top,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animationDelay: star.delay,
-            animationDuration: star.duration
-          }}
-        />
-      ))}
+    <section className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden bg-grid">
+      {/* radar sweep */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] max-w-none pointer-events-none">
+        <div className="radar-sweep w-full h-full rounded-full"></div>
+      </div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-brand-purple/40"></div>
 
-      <div className="absolute top-20 right-20 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '0s' }}></div>
-      <div className="absolute top-40 right-60 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '4s' }}></div>
-      <div className="absolute top-60 left-40 w-1 h-1 bg-white shooting-star" style={{ animationDelay: '8s' }}></div>
-
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px] animate-pulse-slow"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-darkPurple/10 rounded-full blur-[120px] animate-pulse-slow delay-700"></div>
-
-      <div className="relative z-10 text-center max-w-4xl">
-        <p className="text-brand-purple font-mono tracking-widest mb-4 animate-fade-in uppercase text-sm">Full-Stack Developer</p>
-        <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-tight">
-          Building <span className="text-gradient">intelligent solutions</span> that matter.
-        </h1>
-        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Full-stack developer with real shipped software — a defense flight intelligence platform, a nonprofit shelter network, an autonomous internship agent. I work in TypeScript, Python, and Java. I self-host everything. Expected December 2026.
+      <div className="relative z-10 max-w-7xl mx-auto w-full pt-28 pb-16">
+        <p className="font-mono text-brand-purple text-xs md:text-sm tracking-[0.35em] mb-6 flex items-center gap-3">
+          <span className="status-dot inline-block w-2 h-2 rounded-full bg-brand-purple text-brand-purple"></span>
+          ABEL PRASAD // SOFTWARE ENGINEER
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <a href="#projects" className="px-8 py-4 bg-brand-purple hover:bg-brand-darkPurple text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-purple/20">
-            Explore Projects
+        <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[1.02] mb-8">
+          I build systems<br />
+          that <span className="text-gradient">ship.</span>
+        </h1>
+        <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-4">
+          Associate Software Engineer at <span className="text-white font-semibold">Ascensus</span>.
+          Defense flight intelligence, autonomous agents, nonprofit platforms \u2014
+          designed, deployed, and self-hosted.
+        </p>
+        <p className="font-mono text-sm text-brand-purple tracking-[0.2em] mb-12">
+          VECTOR: DEFENSE + AEROSPACE
+        </p>
+
+        <div className="flex gap-4 flex-wrap mb-16">
+          <a href="#projects" className="px-8 py-4 bg-brand-purple hover:bg-brand-darkPurple text-white font-mono text-sm tracking-[0.15em] font-bold transition-all hover:-translate-y-0.5">
+            VIEW PROJECTS
           </a>
-          <a href="/resume.pdf" download className="px-8 py-4 bg-white/10 border border-white/20 hover:border-brand-purple hover:bg-white/20 text-white font-bold rounded-full transition-all flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-            Resume
+          <a href="/resume.pdf" download className="px-8 py-4 bg-transparent border border-white/20 hover:border-brand-purple text-white font-mono text-sm tracking-[0.15em] font-bold transition-all flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            RESUME
           </a>
-          <a href="#contact" className="px-8 py-4 bg-transparent border border-white/10 hover:border-brand-purple text-white font-bold rounded-full transition-all">
-            Get in Touch
+          <a href="#contact" className="px-8 py-4 bg-transparent border border-white/20 hover:border-brand-purple text-white font-mono text-sm tracking-[0.15em] font-bold transition-all">
+            CONTACT
           </a>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 max-w-4xl">
+          {[
+            ["BASE", "PHILADELPHIA, PA"],
+            ["ROLE", "ASSOC. SWE @ ASCENSUS"],
+            ["EDUCATION", "PENN STATE CS \u2014 DEC 2026"],
+            ["FOCUS", "DEFENSE / AEROSPACE"],
+          ].map(([k, v]) => (
+            <div key={k} className="bg-brand-black px-5 py-4">
+              <p className="font-mono text-[10px] tracking-[0.3em] text-gray-600 mb-1">{k}</p>
+              <p className="font-mono text-xs md:text-sm text-gray-200">{v}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

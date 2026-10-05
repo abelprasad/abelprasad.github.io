@@ -3,43 +3,45 @@ export interface Project {
   description: string;
   tags: string[];
   link: string;
+  flagship?: boolean;
 }
 
 export const allProjects: Project[] = [
   {
     title: "SENTINEL",
-    description: "Defense-focused flight intelligence platform. Ingests live ADS-B data, correlates aircraft with threat databases, and visualizes airspace activity on an interactive map. Built for real operational use cases in defense and airspace monitoring.",
-    tags: ["Java 21", "Spring Boot", "Angular", "PostgreSQL", "Groq", "Docker"],
-    link: "https://sentinel.abelprasad.dev/public"
-  },
-  {
-    title: "DOGSRUN",
-    description: "Dog Shelter & Rescue Unification Network — nonprofit platform connecting shelters and rescues across the country. Features 501(c)(3) org approval flows, 150+ PG County dogs with enriched profiles, real-time alert system, full admin portal, and a hardened API with 45/45 security tests passing.",
-    tags: ["Next.js 15", "Supabase", "Resend", "Vercel", "Sentry"],
-    link: "https://dogsrun.org"
+    description: "Defense flight intelligence platform. Ingests live ADS-B aircraft data, builds behavioral baselines per entity, and scores deviations across altitude, speed, and heading \u2014 surfacing anomalies with LLM summaries on a live map. JWT auth + RBAC. Shipped via GitHub Actions \u2192 Docker Hub \u2192 self-hosted server.",
+    tags: ["Java 21", "Spring Boot", "PostgreSQL", "Angular", "Docker"],
+    link: "https://github.com/abelprasad/sentinel",
+    flagship: true
   },
   {
     title: "Scout",
-    description: "Self-hosted multi-agent internship detection and outreach system. Crawls GitHub internship repos, scores 2,700+ listings against a custom rubric (location, stack, title, AI focus), delivers a ranked daily digest via HTML email and Telegram, and auto cold-emails high-scoring companies via Gmail SMTP with resume attached.",
-    tags: ["FastAPI", "SQLite", "Playwright", "Ollama", "Python"],
-    link: "https://github.com/abelprasad"
+    description: "Mission-agnostic agent framework running on my home server. Generic discover \u2192 score \u2192 notify pipeline with pluggable missions \u2014 point it at anything. Local LLM scoring via Ollama, Telegram digests, web dashboard.",
+    tags: ["Python", "FastAPI", "Playwright", "Ollama", "SQLite"],
+    link: "https://github.com/abelprasad/Scout"
+  },
+  {
+    title: "DOGSRUN",
+    description: "Shelter-to-rescue matching platform for a real nonprofit, live in production. 150+ dogs, shelter and rescue registration flows, 501(c)(3) approval pipeline, alert matching engine, admin portal. Hardened API \u2014 45/45 tests passing.",
+    tags: ["Next.js 15", "Supabase", "TypeScript", "Vercel"],
+    link: "https://dogsrun.org"
   },
   {
     title: "Fillr",
-    description: "AI-powered Chrome extension that automates job applications with one-click autofill. Features intelligent field detection across 40+ types, AI-generated cover letters and custom answers using Groq/Llama, application tracking, and privacy-first local storage.",
-    tags: ["Chrome Extension", "JavaScript", "Groq AI", "Manifest V3"],
+    description: "AI job-application autofill as a Chrome extension. Detects 40+ field types across Greenhouse, Lever, Workday, Taleo, and LinkedIn \u2014 generates cover letters and custom answers grounded in your actual resume.",
+    tags: ["JavaScript", "Chrome MV3", "Groq", "PDF.js"],
     link: "https://github.com/abelprasad/fillr"
   },
   {
     title: "Mini-Pupper Robotics",
-    description: "Capstone robotics project securing a quadruped robot's control network with mTLS across all microservices. Built a MongoDB telemetry pipeline and Redis state layer for real-time sensor inspection, and integrated AprilTag detection with a ROS2 Python control layer for autonomous maze navigation without GPS.",
-    tags: ["ROS2", "Python", "MongoDB", "Redis", "mTLS"],
+    description: "Senior capstone: secured a quadruped robot's control network with mTLS across microservices. MongoDB telemetry pipeline, Redis state layer, AprilTag detection with ROS 2 for autonomous maze navigation without GPS.",
+    tags: ["ROS 2", "Python", "MongoDB", "Redis", "mTLS"],
     link: "https://github.com/abelprasad"
   },
   {
     title: "FanTravels",
-    description: "Full-stack web app connecting pop-culture fandom with UNESCO World Heritage Sites. Features user check-ins, posts, badges, and geolocation mapping with PostGIS.",
-    tags: ["FastAPI", "Next.js", "PostgreSQL", "PostGIS", "Tailwind"],
+    description: "Full-stack app connecting pop-culture fandom with UNESCO World Heritage Sites. Check-ins, posts, badges, and PostGIS geolocation mapping.",
+    tags: ["FastAPI", "Next.js", "PostgreSQL", "PostGIS"],
     link: "https://github.com/abelprasad/Fan-Travels"
   },
 ];
