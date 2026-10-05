@@ -13,16 +13,16 @@ const SectionHeader = ({ index, label, title, description }: Props) => {
     <div className="mb-14 md:mb-16">
       <p className="font-mono text-xs md:text-sm mb-5">
         <span className="text-gray-600">[</span>
-        <span className="text-brand-green">{index}</span>
+        <span className="text-brand-darkGreen">{index}</span>
         <span className="text-gray-600">]</span>
-        <span className="text-brand-green"> abel@indra</span>
+        <span className="text-brand-darkGreen"> abel@indra</span>
         <span className="text-gray-600">:</span>
-        <span className="text-gray-500">~/portfolio</span>
+        <span className="text-brand-muted">~/portfolio</span>
         <span className="text-gray-600">$ </span>
-        <span className="text-gray-300">cat {slug}.log</span>
+        <span className="text-brand-ink">cat {slug}.log</span>
       </p>
-      <h2 className="font-mono text-4xl md:text-5xl font-extrabold tracking-tight glow-dim">{title}</h2>
-      {description && <p className="text-gray-400 mt-5 max-w-xl leading-relaxed">{description}</p>}
+      <h2 className="font-mono text-4xl md:text-5xl font-extrabold tracking-tight">{title}</h2>
+      {description && <p className="text-brand-muted mt-5 max-w-xl leading-relaxed">{description}</p>}
       <p className="font-mono text-gray-700 text-xs mt-6 select-none" aria-hidden="true">
         {'-'.repeat(48)}
       </p>

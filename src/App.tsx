@@ -9,8 +9,6 @@ import ScrollToTop from './components/ScrollToTop';
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="crt-scanlines" aria-hidden="true" />
-      <div className="crt-vignette" aria-hidden="true" />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />

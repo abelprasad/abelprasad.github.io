@@ -34,7 +34,7 @@ const Hero = () => {
         {/* boot sequence */}
         <div className="font-mono text-xs md:text-sm mb-8 min-h-[6.5rem]" aria-hidden={!done}>
           {BOOT_LINES.slice(0, linesDone).map((line, i) => (
-            <p key={i} className={line.startsWith('>') ? 'text-brand-green glow-dim' : 'text-gray-600'}>
+            <p key={i} className={line.startsWith('>') ? 'text-brand-darkGreen' : 'text-gray-600'}>
               {line}
             </p>
           ))}
@@ -42,44 +42,44 @@ const Hero = () => {
         </div>
 
         <div style={{ opacity: done ? 1 : 0.25, transition: 'opacity 0.4s' }}>
-          <p className="font-mono text-brand-green text-xs md:text-sm tracking-[0.35em] mb-6 flex items-center gap-3">
+          <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-6 flex items-center gap-3">
             <span className="status-dot inline-block w-2 h-2 rounded-full bg-brand-green text-brand-green"></span>
             ABEL PRASAD // SOFTWARE ENGINEER
           </p>
           <h1 className="font-mono text-5xl md:text-8xl font-extrabold tracking-tighter leading-[1.02] mb-8">
             I build systems<br />
-            that <span className="text-brand-green glow">ship.</span>
+            that <span className="text-brand-green">ship.</span>
             <span className="blink text-brand-green">\u2588</span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
-            Associate Software Engineer at <span className="text-brand-green font-semibold">Ascensus</span>.
+          <p className="text-brand-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
+            Associate Software Engineer at <span className="text-brand-darkGreen font-semibold">Ascensus</span>.
             Flight intelligence, autonomous agents, nonprofit platforms \u2014
             designed, deployed, and self-hosted.
           </p>
 
           <div className="flex gap-4 flex-wrap mb-16">
-            <a href="#projects" className="px-8 py-4 bg-brand-green hover:bg-brand-darkGreen text-black font-mono text-sm tracking-[0.15em] font-bold transition-all hover:-translate-y-0.5">
+            <a href="#projects" className="px-8 py-4 bg-brand-darkGreen hover:bg-green-800 text-white font-mono text-sm tracking-[0.15em] font-bold transition-all hover:-translate-y-0.5">
               ./view_projects
             </a>
-            <a href="/resume.pdf" download className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-green font-mono text-sm tracking-[0.15em] font-bold transition-all flex items-center gap-2">
+            <a href="/resume.pdf" download className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-darkGreen font-mono text-sm tracking-[0.15em] font-bold transition-all flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               ./download_resume
             </a>
-            <a href="#contact" className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-green font-mono text-sm tracking-[0.15em] font-bold transition-all">
+            <a href="#contact" className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-darkGreen font-mono text-sm tracking-[0.15em] font-bold transition-all">
               ./contact
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-green/20 border border-brand-green/20 max-w-4xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-line border border-brand-line max-w-4xl">
             {[
               ["BASE", "PHILADELPHIA, PA"],
               ["ROLE", "ASSOC. SWE @ ASCENSUS"],
               ["EDUCATION", "PENN STATE CS \u2014 DEC 2026"],
               ["FOCUS", "SHIPPED SYSTEMS"],
             ].map(([k, v]) => (
-              <div key={k} className="bg-brand-black px-5 py-4">
+              <div key={k} className="bg-white px-5 py-4">
                 <p className="font-mono text-[10px] tracking-[0.3em] text-gray-600 mb-1">{k}</p>
-                <p className="font-mono text-xs md:text-sm text-gray-200">{v}</p>
+                <p className="font-mono text-xs md:text-sm text-brand-ink">{v}</p>
               </div>
             ))}
           </div>
