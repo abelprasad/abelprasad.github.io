@@ -28,7 +28,7 @@ const ExperienceCard = ({ exp }: { exp: Experience }) => (
 );
 
 export const ExperienceSection = () => (
-  <section id="experience" className="py-24 md:py-32 px-6 border-t border-brand-line">
+  <section id="experience" className="py-24 md:py-32 px-6 border-t border-brand-line bg-dots-soft scroll-mt-20">
     <div className="max-w-7xl mx-auto">
       <div className="mb-14">
         <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-5">

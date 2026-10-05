@@ -27,9 +27,10 @@ const Hero = () => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden bg-grid"
+      className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden"
       onClick={() => setSkipped(true)}
     >
+      <div aria-hidden="true" className="bg-grid bg-grid-fade absolute inset-0" />
       <div className="relative z-10 max-w-7xl mx-auto w-full pt-28 pb-16">
         {/* boot sequence */}
         <div className="font-mono text-xs md:text-sm mb-8 min-h-[6.5rem]" aria-hidden={!done}>
@@ -44,7 +45,7 @@ const Hero = () => {
         <div style={{ opacity: done ? 1 : 0.25, transition: 'opacity 0.4s' }}>
           <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-6 flex items-center gap-3">
             <span className="status-dot inline-block w-2 h-2 rounded-full bg-brand-green text-brand-green"></span>
-            ABEL PRASAD // SOFTWARE ENGINEER
+            ABEL PRASAD // SOFTWARE ENGINEER — AI SYSTEMS
           </p>
           <h1 className="font-mono text-5xl md:text-8xl font-extrabold tracking-tighter leading-[1.02] mb-8">
             I build systems<br />
@@ -53,8 +54,8 @@ const Hero = () => {
           </h1>
           <p className="text-brand-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
             Associate Software Engineer at <span className="text-brand-darkGreen font-semibold">Ascensus</span>.
-            Flight intelligence, autonomous agents, nonprofit platforms —
-            designed, deployed, and self-hosted.
+            I build AI systems that ship — autonomous agents, LLM-powered platforms,
+            flight intelligence — designed, deployed, and self-hosted.
           </p>
 
           <div className="flex gap-4 flex-wrap mb-16">

@@ -6,7 +6,7 @@
     <style>:root{color-scheme:only light}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abel Prasad | Software Engineer</title>
-    <meta name="description" content="Abel Prasad — Associate Software Engineer at Ascensus. Building flight intelligence systems, autonomous agents, and production software. Penn State CS, Dec 2026.">
+    <meta name="description" content="Abel Prasad — Associate Software Engineer at Ascensus building AI systems: autonomous agents, LLM-powered platforms, and flight intelligence. Penn State CS, Dec 2026.">
     <script>
       // Handle redirects from 404.html for client-side routing
       (function() {
@@ -112,6 +112,54 @@
         }
         input::placeholder, textarea::placeholder {
             color: #7d9184;
+        }
+
+        /* ---- texture utilities: light terminal ---- */
+        .bg-blueprint {
+            background-image:
+                linear-gradient(rgba(22, 163, 74, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(22, 163, 74, 0.08) 1px, transparent 1px),
+                linear-gradient(rgba(22, 163, 74, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(22, 163, 74, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+        }
+        .bg-dots {
+            background-image: radial-gradient(rgba(22, 163, 74, 0.13) 1.2px, transparent 1.3px);
+            background-size: 22px 22px;
+        }
+        .bg-dots-soft {
+            background-image: radial-gradient(rgba(22, 163, 74, 0.07) 1.2px, transparent 1.3px);
+            background-size: 22px 22px;
+        }
+        .bg-grid-fade {
+            -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 35%, black 25%, transparent 78%);
+            mask-image: radial-gradient(ellipse 90% 85% at 50% 35%, black 25%, transparent 78%);
+        }
+        /* paper grain over the whole page, kept below the navbar */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        @keyframes ticker-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .ticker-track {
+            animation: ticker-scroll 32s linear infinite;
+        }
+        .ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        :focus-visible {
+            outline: 2px solid #15803d;
+            outline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-track { animation: none; }
         }
     </style>
 </head>
