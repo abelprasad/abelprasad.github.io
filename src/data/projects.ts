@@ -2,7 +2,7 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  link: string;
+  link?: string;
   flagship?: boolean;
 }
 
@@ -35,8 +35,7 @@ export const allProjects: Project[] = [
   {
     title: "Mini-Pupper Robotics",
     description: "Senior capstone: secured a quadruped robot's control network with mTLS across microservices. MongoDB telemetry pipeline, Redis state layer, AprilTag detection with ROS 2 for autonomous maze navigation without GPS.",
-    tags: ["ROS 2", "Python", "MongoDB", "Redis", "mTLS"],
-    link: "https://github.com/abelprasad"
+    tags: ["ROS 2", "Python", "MongoDB", "Redis", "mTLS"]
   },
   {
     title: "FanTravels",
