@@ -62,12 +62,14 @@ const Hero = () => {
             <a href="#projects" className="px-8 py-4 bg-brand-darkGreen hover:bg-green-800 text-white font-mono text-sm tracking-[0.15em] font-bold transition-all hover:-translate-y-0.5">
               ./view_projects
             </a>
-            <a href="/resume.pdf" download className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-darkGreen font-mono text-sm tracking-[0.15em] font-bold transition-all flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-              ./download_resume
-            </a>
             <a href="#contact" className="px-8 py-4 bg-transparent border border-brand-green/40 hover:border-brand-green text-brand-darkGreen font-mono text-sm tracking-[0.15em] font-bold transition-all">
               ./contact
+            </a>
+          </div>
+
+          <div className="mb-16">
+            <a href="/resume.pdf" download className="font-mono text-xs tracking-[0.15em] text-brand-muted hover:text-brand-darkGreen transition-colors">
+              ./download_resume
             </a>
           </div>
 
