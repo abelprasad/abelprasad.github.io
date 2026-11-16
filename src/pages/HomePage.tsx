@@ -114,7 +114,7 @@ const HomePage = () => {
             </Link>
           </div>
           {featured.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 1)} />)}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {rest.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 2)} />)}
           </div>
         </div>

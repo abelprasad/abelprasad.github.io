@@ -74,7 +74,7 @@ const ProjectCard = ({ project, index }: Props) => {
         ))}
       </div>
     </>,
-    "card-hover group relative flex flex-col bg-brand-panel border border-brand-line p-7 overflow-hidden h-full"
+    "card-hover group relative flex flex-col bg-brand-panel border border-brand-line p-7 overflow-hidden"
   );
 };
 

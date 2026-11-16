@@ -27,7 +27,7 @@ const AllProjectsPage = () => {
             <p className="text-brand-muted text-lg">Every system below was designed, built, and deployed — no localhost-only demos.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
             {allProjects.map((p, i) => <ProjectCard key={p.title} project={p} index={"0" + (i + 1)} />)}
           </div>
         </div>
