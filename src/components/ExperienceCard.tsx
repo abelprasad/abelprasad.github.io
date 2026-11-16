@@ -31,7 +31,7 @@ export const ExperienceSection = () => (
   <section id="experience" className="py-24 md:py-32 px-6 border-t border-brand-line bg-dots-soft scroll-mt-20">
     <div className="max-w-7xl mx-auto">
       <div className="mb-14">
-        <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-5">
+        <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.1em] mb-5">
           <span className="text-gray-600">01</span><span className="text-gray-600"> // </span>SERVICE RECORD
         </p>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Experience</h2>

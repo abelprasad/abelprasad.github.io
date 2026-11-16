@@ -43,7 +43,7 @@ const Hero = () => {
         </div>
 
         <div style={{ opacity: done ? 1 : 0.25, transition: 'opacity 0.4s' }}>
-          <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-6 flex items-center gap-3">
+          <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.1em] mb-6 flex items-center gap-3">
             <span className="status-dot inline-block w-2 h-2 rounded-full bg-brand-green text-brand-green"></span>
             ABEL PRASAD // SOFTWARE ENGINEER — AI SYSTEMS
           </p>

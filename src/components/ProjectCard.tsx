@@ -33,7 +33,7 @@ const ProjectCard = ({ project, index }: Props) => {
         </div>
         <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-8 items-center p-8 md:p-12">
           <div>
-            <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-4">
+            <p className="font-mono text-brand-darkGreen text-xs tracking-[0.1em] mb-4">
               <span className="text-gray-600">{index}</span> // FLAGSHIP SYSTEM
             </p>
             <h3 className="text-3xl md:text-5xl font-bold tracking-tight mb-5 group-hover:text-brand-green transition-colors">

@@ -36,7 +36,7 @@ const Contact = () => {
     <section id="contact" className="py-32 px-6 bg-brand-green/5 bg-dots border-t border-brand-line scroll-mt-20">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-5"><span className="text-gray-600">06</span><span className="text-gray-600"> // </span>OPEN CHANNEL</p>
+          <p className="font-mono text-brand-darkGreen text-xs tracking-[0.1em] mb-5"><span className="text-gray-600">06</span><span className="text-gray-600"> // </span>OPEN CHANNEL</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Let’s <span className="text-brand-green">talk.</span></h2>
           <p className="text-brand-muted text-lg max-w-2xl mx-auto">
             Associate SWE at Ascensus building AI systems. If you’re building real systems for real users — let’s talk.

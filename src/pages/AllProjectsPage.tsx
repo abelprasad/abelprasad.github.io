@@ -22,7 +22,7 @@ const AllProjectsPage = () => {
           </button>
 
           <div className="mb-16">
-            <p className="font-mono text-brand-darkGreen text-xs tracking-[0.35em] mb-5">// FULL INVENTORY</p>
+            <p className="font-mono text-brand-darkGreen text-xs tracking-[0.1em] mb-5">// FULL INVENTORY</p>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">All Projects</h1>
             <p className="text-brand-muted text-lg">Every system below was designed, built, and deployed — no localhost-only demos.</p>
           </div>

@@ -11,14 +11,14 @@ const Navbar = () => {
         <span className="text-brand-darkGreen">abel@portfolio</span><span className="text-brand-muted">:~$</span><span className="blink text-brand-green">█</span>
       </Link>
       <div className="flex items-center gap-6">
-        <div className="space-x-8 text-xs font-mono uppercase tracking-[0.2em] text-brand-muted hidden md:flex">
+        <div className="space-x-8 text-[11px] font-mono uppercase tracking-[0.1em] text-brand-muted hidden md:flex">
           <a href={anchor('#experience')} className="hover:text-brand-green transition-colors">Experience</a>
           <a href={anchor('#projects')} className="hover:text-brand-green transition-colors">Projects</a>
           <a href={anchor('#stack')} className="hover:text-brand-green transition-colors">Stack</a>
           <Link to="/blog" className="hover:text-brand-green transition-colors">Blog</Link>
           <a href={anchor('#contact')} className="hover:text-brand-green transition-colors">Contact</a>
         </div>
-        <span className="hidden sm:flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-brand-muted">
+        <span className="hidden sm:flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] text-brand-muted">
           <span className="status-dot inline-block w-1.5 h-1.5 rounded-full bg-brand-green text-brand-green"></span>
           ONLINE
         </span>

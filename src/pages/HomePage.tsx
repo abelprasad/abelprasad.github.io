@@ -28,7 +28,7 @@ const Stack = () => (
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-brand-line border border-brand-line">
         {stackGroups.map(([group, items]) => (
           <div key={group} className="bg-white p-6 transition-colors hover:bg-brand-dim/60">
-            <p className="font-mono text-brand-darkGreen text-[11px] tracking-[0.3em] mb-5">{group}</p>
+            <p className="font-mono text-brand-darkGreen text-[11px] tracking-[0.1em] mb-5">{group}</p>
             <ul className="space-y-2.5">
               {items.map(item => (
                 <li key={item} className="text-brand-ink text-sm">{item}</li>
@@ -73,11 +73,11 @@ const About = () => (
           </p>
           <div className="flex gap-4 flex-wrap pt-2">
             <a href="https://github.com/abelprasad" target="_blank" rel="noopener noreferrer"
-              className="px-6 py-3 border border-brand-line hover:border-brand-green font-mono text-xs tracking-[0.2em] transition-colors">
+              className="px-6 py-3 border border-brand-line hover:border-brand-green font-mono text-xs tracking-[0.1em] transition-colors">
               GITHUB
             </a>
             <a href="https://www.linkedin.com/in/abel-prasad/" target="_blank" rel="noopener noreferrer"
-              className="px-6 py-3 border border-brand-line hover:border-brand-green font-mono text-xs tracking-[0.2em] transition-colors">
+              className="px-6 py-3 border border-brand-line hover:border-brand-green font-mono text-xs tracking-[0.1em] transition-colors">
               LINKEDIN
             </a>
           </div>
