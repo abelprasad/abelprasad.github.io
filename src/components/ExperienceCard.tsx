@@ -34,7 +34,7 @@ export const ExperienceSection = () => (
         <p className="font-mono text-brand-darkGreen text-xs md:text-sm tracking-[0.35em] mb-5">
           <span className="text-gray-600">01</span><span className="text-gray-600"> // </span>SERVICE RECORD
         </p>
-        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Experience</h2>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Experience</h2>
       </div>
       <div className="max-w-4xl">
         {allExperience.map(exp => <ExperienceCard key={exp.company} exp={exp} />)}

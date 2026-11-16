@@ -47,7 +47,7 @@ const Hero = () => {
             <span className="status-dot inline-block w-2 h-2 rounded-full bg-brand-green text-brand-green"></span>
             ABEL PRASAD // SOFTWARE ENGINEER — AI SYSTEMS
           </p>
-          <h1 className="font-mono text-5xl md:text-8xl font-extrabold tracking-tighter leading-[1.02] mb-8">
+          <h1 className="font-mono text-5xl md:text-8xl font-bold tracking-tighter leading-[1.02] mb-8">
             I build systems<br />
             that <span className="text-brand-green">ship.</span>
             <span className="blink text-brand-green">█</span>

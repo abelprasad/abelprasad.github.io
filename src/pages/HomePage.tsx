@@ -106,7 +106,7 @@ const HomePage = () => {
                 <span className="text-brand-darkGreen"> abel@portfolio</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
                 <span className="text-brand-ink">cat deployed-systems.log</span>
               </p>
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Featured Projects</h2>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Featured Projects</h2>
             </div>
             <Link to="/projects" className="font-mono text-brand-darkGreen text-xs tracking-[0.2em] hover:text-green-800 transition-colors flex items-center gap-2 shrink-0">
               VIEW ALL / {allProjects.length}
@@ -132,7 +132,7 @@ const HomePage = () => {
                 <span className="text-brand-darkGreen"> abel@portfolio</span><span className="text-gray-600">:</span><span className="text-brand-muted">~/portfolio</span><span className="text-gray-600">$ </span>
                 <span className="text-brand-ink">cat transmission.log</span>
               </p>
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">From the Blog</h2>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">From the Blog</h2>
             </div>
             <Link to="/blog" className="font-mono text-brand-darkGreen text-xs tracking-[0.2em] hover:text-green-800 transition-colors flex items-center gap-2 shrink-0">
               VIEW ALL / {allPosts.length}

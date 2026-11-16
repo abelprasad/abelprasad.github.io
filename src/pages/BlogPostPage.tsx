@@ -35,7 +35,7 @@ const BlogPostPage = () => {
               <span key={tag} className="px-3 py-1 bg-brand-dim text-brand-darkGreen text-xs rounded-none font-mono">{tag}</span>
             ))}
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">{post.title}</h1>
           <div className="flex items-center gap-4 text-xs text-gray-600 font-mono mb-12 border-b border-brand-line pb-8">
             <span>{formatDate(post.date)}</span>
             <span>·</span>

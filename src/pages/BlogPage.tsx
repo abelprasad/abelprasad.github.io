@@ -24,7 +24,7 @@ const BlogPage = () => {
             Back to Home
           </button>
           <div className="mb-10">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Blog</h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">Blog</h1>
             <p className="text-brand-muted text-lg">Thoughts on building software, AI, and the occasional late-night debugging session.</p>
           </div>
 
