@@ -61,7 +61,7 @@ const BlogPostPage = () => {
         </div>
       </article>
       <footer className="py-12 px-6 text-center text-gray-600 text-xs border-t border-brand-line uppercase tracking-[0.2em]">
-        © {new Date().getFullYear()} Designed & Coded with Passion
+        © {new Date().getFullYear()} Abel Prasad — Built & self-hosted
       </footer>
     </main>
   );
