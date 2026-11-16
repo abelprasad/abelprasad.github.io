@@ -84,7 +84,7 @@ const Contact = () => {
                 required
                 rows={5}
                 className="w-full px-4 py-3 bg-brand-dim border border-brand-line rounded-none focus:outline-none focus:border-brand-green transition-colors text-brand-ink resize-none"
-                placeholder="Tell me about your project..."
+                placeholder="Your project"
               />
             </div>
 
